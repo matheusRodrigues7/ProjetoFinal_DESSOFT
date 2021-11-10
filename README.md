@@ -1,4 +1,4 @@
-# Olá Mundo!🌎 Seja Bem-Vindo ao Projeto Final DESSOFT
+# 🌎 Olá Mundo! Seja Bem-Vindo ao Projeto Final DESSOFT 🎮
 Jetpack Joyride PyGames
 
 Membros:
