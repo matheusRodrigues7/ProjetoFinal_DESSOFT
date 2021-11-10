@@ -11,7 +11,7 @@
 <img align= "left" src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white"/>
 <img align= "left" src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>.  
 
-### Ajustes e melhorias: (Roadmap)
+### Ajustes e melhorias: (ROADMAP)
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
