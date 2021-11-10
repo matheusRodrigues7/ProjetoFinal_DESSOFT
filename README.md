@@ -1,6 +1,8 @@
 # 🌎 Olá Mundo! Seja Bem-Vindo ao Projeto Final DESSOFT 🎮
 
-<img src=https://thumbs.gfycat.com/PrestigiousRawAnnashummingbird-max-1mb.gif width="300">
+<img align= "right" src="https://img.shields.io/github/repo-size/matheusRodrigues7/ProjetoFinal_DESSOFT?style=for-the-badge" />
+
+<img align= "center" src=https://thumbs.gfycat.com/PrestigiousRawAnnashummingbird-max-1mb.gif width="300">
 
 Jetpack Joyride PyGames 🕹️
 
@@ -13,7 +15,5 @@ Participantes do projeto final:
 1. Nicolas Yassuda [![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/matheusRodrigues7)](https://github.com/matheusRodrigues7)
 2. Matheus Rodrigues [![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/matheusRodrigues7)](https://github.com/matheusRodrigues7)
 3. Bruno Lago [![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/Lag0)](https://github.com/Lag0)
-
-
 
 Jogo desenvolvido com Pygame para a disciplina de Design de Software do 1° Semestre de Engenharia do Insper
