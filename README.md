@@ -6,14 +6,19 @@
 
 Jetpack Joyride PyGames 🕹️
 
-Desenvolvido usando: 
-	<img align= "right" src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white"/>
-	<img align= "right" src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
+Desenvolvido usando:  
+
+<img align= "right" src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white"/>
+<img align= "right" src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
 
 # 🤝 Membros:
 Participantes do projeto final:
-1. Nicolas Yassuda [![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/matheusRodrigues7)](https://github.com/matheusRodrigues7)
-2. Matheus Rodrigues [![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/matheusRodrigues7)](https://github.com/matheusRodrigues7)
-3. Bruno Lago [![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/Lag0)](https://github.com/Lag0)
+----
+1. Nicolas Yassuda  
+[![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/matheusRodrigues7)](https://github.com/matheusRodrigues7)
+2. Matheus Rodrigues  
+[![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/matheusRodrigues7)](https://github.com/matheusRodrigues7)
+3. Bruno Lago  
+[![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/Lag0)](https://github.com/Lag0)
 
 Jogo desenvolvido com Pygame para a disciplina de Design de Software do 1° Semestre de Engenharia do Insper
