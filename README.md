@@ -1,5 +1,5 @@
 # Projeto Final DESSOFT
-# Jetpack Joyride PyGames
+Jetpack Joyride PyGames
 
 Membros:
 1. Nicolas Yassuda
