@@ -1,6 +1,6 @@
 # 🌎 Olá Mundo! Seja Bem-Vindo ao Projeto Final DESSOFT 🎮
 
-<img align= "left" src="https://img.shields.io/github/repo-size/matheusRodrigues7/ProjetoFinal_DESSOFT?style=for-the-badge" />
+<img align= "left" src="https://img.shields.io/github/repo-size/matheusRodrigues7/ProjetoFinal_DESSOFT?style=for-the-badge" width="100"/>
 
 <img align= "center" src=https://thumbs.gfycat.com/PrestigiousRawAnnashummingbird-max-1mb.gif width="300">
 
