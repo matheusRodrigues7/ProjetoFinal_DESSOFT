@@ -1,7 +1,8 @@
 # 🌎 Olá Mundo! Seja Bem-Vindo ao Projeto Final DESSOFT 🎮
 
-<img src=https://thumbs.gfycat.com/PrestigiousRawAnnashummingbird-max-1mb.gif width="300">
-## Jetpack Joyride PyGames 🕹️
+<img src=https://gfycat.com/ethicalverifiablehagfish width="300">
+
+Jetpack Joyride PyGames 🕹️
 
 Desenvolvido usando: 
 	<img src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white"/>
