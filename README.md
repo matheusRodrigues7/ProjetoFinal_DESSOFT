@@ -8,9 +8,8 @@ Desenvolvido usando:
 
 Membros:
 1. Nicolas Yassuda
-2. Matheus Rodrigues
-3. Bruno Lago
-[![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/Lag0)](https://github.com/Lag0)
+2. Matheus Rodrigues [![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/matheusRodrigues7)](https://github.com/matheusRodrigues7)
+3. Bruno Lago [![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/Lag0)](https://github.com/Lag0)
 
 
 
