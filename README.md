@@ -1,6 +1,5 @@
 # 🌎 Olá Mundo! Seja Bem-Vindo ao Projeto Final DESSOFT 🎮
-Jetpack Joyride PyGames <code><img height= "20"src= "https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white"></code>
-
+Jetpack Joyride PyGames <img src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white"/>
 Membros:
 1. Nicolas Yassuda
 2. Matheus Rodrigues
