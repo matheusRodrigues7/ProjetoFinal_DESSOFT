@@ -8,10 +8,10 @@ Desenvolvido usando:
 
 Membros:
 1. Nicolas Yassuda
-[![NOMEGIT GitHub stats](https://github-readme-stats.vercel.app/api?username=NOMEGIT)](https://github.com/NOMEGIT/github-readme-stats)
 2. Matheus Rodrigues
 3. Bruno Lago
-4. [![Lag0 GitHub](https://github.com/Lag0)]
+[![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/Lag0)](https://github.com/Lag0)
+
 
 
 Jogo desenvolvido com Pygame para a disciplina de Design de Software do 1° Semestre de Engenharia do Insper
