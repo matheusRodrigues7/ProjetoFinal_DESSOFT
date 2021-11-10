@@ -8,6 +8,10 @@ FPS = 60
 IMG_DIR = path.join(path.dirname(__file__), 'assets', 'img')
 SND_DIR = path.join(path.dirname(__file__), 'assets', 'snd')
 
+# Define tamanhos
+PLAYER_WIDTH = 50
+PLAYER_HEIGHT = 38
+
 # Define algumas variáveis com as cores básicas
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
