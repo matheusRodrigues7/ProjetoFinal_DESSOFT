@@ -84,9 +84,9 @@ class Raio(pygame.sprite.Sprite):
 
         self.image = img
         self.rect = self.image.get_rect()
-        self.rect.x = random.randint(WIDTH+100, PLAYER_WIDTH)
+        self.rect.x = random.randint(PLAYER_WIDTH, WIDTH+100)
         self.rect.y = random.randint(0, HEIGHT-PLAYER_HEIGHT)
-        self.speedx = random.randint(-3, -23)
+        self.speedx = random.randint(-20, -5)
         #self.speedy = random.randint(2, 9)
 
     def update(self):
@@ -96,9 +96,9 @@ class Raio(pygame.sprite.Sprite):
         # Se o meteoro passar do final da tela, volta para cima e sorteia
         # novas posições e velocidades
         if self.rect.top > HEIGHT or self.rect.right < 0 or self.rect.left > WIDTH:
-            self.rect.x = random.randint(WIDTH+100, PLAYER_WIDTH)
+            self.rect.x = random.randint(PLAYER_WIDTH, WIDTH+100)
             self.rect.y = random.randint(0, HEIGHT-PLAYER_HEIGHT)
-            self.speedx = random.randint(-5, -20)
+            self.speedx = random.randint(-20, -5)
             #self.speedy = random.randint(2, 9)
 
 game = True
