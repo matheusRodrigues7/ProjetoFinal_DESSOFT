@@ -1,13 +1,15 @@
 # 🌎 Olá Mundo! Seja Bem-Vindo ao Projeto Final DESSOFT 🎮
 
 Jetpack Joyride PyGames 
+<img src=https://thumbs.gfycat.com/PrestigiousRawAnnashummingbird-max-1mb.gif width="30">
 
 Desenvolvido usando: 
 	<img src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white"/>
 	<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
 
-Membros:
-1. Nicolas Yassuda
+# 🤝 Membros:
+Participantes do projeto final:
+1. Nicolas Yassuda [![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/matheusRodrigues7)](https://github.com/matheusRodrigues7)
 2. Matheus Rodrigues [![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/matheusRodrigues7)](https://github.com/matheusRodrigues7)
 3. Bruno Lago [![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white&link=https://github.com/Lag0)](https://github.com/Lag0)
 
