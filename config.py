@@ -1,5 +1,12 @@
+from os import path
+
 WIDTH = 600
 HEIGHT = 450
+FPS = 60
+
+# Estabelece a pasta que contem as figuras e sons.
+IMG_DIR = path.join(path.dirname(__file__), 'assets', 'img')
+SND_DIR = path.join(path.dirname(__file__), 'assets', 'snd')
 
 # Define algumas variáveis com as cores básicas
 WHITE = (255, 255, 255)
