@@ -44,13 +44,14 @@ font = pygame.font.SysFont(None, 48)
 background = pygame.image.load('assets/img/background.jpg').convert()
 ground = pygame.image.load('assets/img/background_ground.png').convert_alpha()
 background_move = pygame.image.load('assets/img/background_move.png').convert_alpha()
-player_img = pygame.image.load('assets/img/player.png').convert_alpha()
-player_img = pygame.transform.scale(player_img, (PLAYER_WIDTH, PLAYER_HEIGHT))
+player_img = pygame.image.load('assets/img/walk1.png').convert_alpha()
+#player_img = pygame.transform.scale(player_img, (PLAYER_WIDTH, PLAYER_HEIGHT))
 raio1 = pygame.image.load('assets/img/zap1.png').convert_alpha()
 raio2 = pygame.image.load('assets/img/zap2.png').convert_alpha()
 raio3 = pygame.image.load('assets/img/zap3.png').convert_alpha()
 raio4 = pygame.image.load('assets/img/zap4.png').convert_alpha()
 raio5 = pygame.image.load('assets/img/zap5.png').convert_alpha()
+img_fly = pygame.image.load('assets/img/flying1.png')
 ground_scroll = 0
 scroll_speed = 5
 
@@ -60,17 +61,42 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, img):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
-
         self.image = img
         self.rect = self.image.get_rect()
         self.rect.centery = 625
+        self.rect
         self.rect.left = 80
         self.speedy = 0
+        self.images = []
+        self.index = 0
+        self.counter = 0
+        self.fly = [img_fly]
+        for num in range(1,3):
+            img2 = pygame.image.load(f'assets/img/walk{num}.png')
+            self.images.append(img2)
+        self.vel=0
 
     def update(self):
         # Atualização da posição da nave
+        self.vel+=0.5
+        if self.vel > 8:
+            self.vel = 8
+        if self.rect.bottom<=657:
+            self.rect.y+=int(self.vel)
+        if self.rect.top<=110:
+            self.rect.y=110
         self.rect.y += self.speedy
-
+        if self.rect.centery >600 and self.rect.centery<800 :
+            self.counter+= 1
+            walk_cooldown = 5
+            if self.counter > walk_cooldown:
+                self.counter = 0
+                self.index +=1
+                if self.index >= len(self.images):
+                    self.index = 0
+            self.image = self.images[self.index]
+            #if event.key == pygame.KEYUP:
+                #self.image = self.fly[0]
         # Mantem dentro da tela
         if self.rect.right > WIDTH:
             self.rect.right = WIDTH
@@ -80,6 +106,7 @@ class Player(pygame.sprite.Sprite):
             self.rect.bottom = HEIGHT
         if self.rect.top < 0:
             self.rect.top = 0
+        
 
 class Raio(pygame.sprite.Sprite):
     def __init__(self, img):
