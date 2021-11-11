@@ -1,1 +1,1 @@
-player
+all_sprites = pygame.sprite.Group()

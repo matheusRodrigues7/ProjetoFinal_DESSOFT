@@ -38,8 +38,8 @@ window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Jetpack Joyride')
 
 # ----- Inicia assets
-PLAYER_WIDTH = 71
-PLAYER_HEIGHT = 83
+PLAYER_WIDTH = 91
+PLAYER_HEIGHT = 103
 font = pygame.font.SysFont(None, 48)
 background = pygame.image.load('assets/img/background.jpg').convert()
 ground = pygame.image.load('assets/img/background_ground.png').convert_alpha()
@@ -63,8 +63,8 @@ class Player(pygame.sprite.Sprite):
 
         self.image = img
         self.rect = self.image.get_rect()
-        self.rect.centery = HEIGHT / 2
-        self.rect.left = WIDTH - 400
+        self.rect.centery = 625
+        self.rect.left = 80
         self.speedy = 0
 
     def update(self):
