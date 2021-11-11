@@ -27,28 +27,32 @@ pygame.quit()  # Função do PyGame que finaliza os recursos utilizados'''
 
 # ===== Inicialização =====
 # ----- Importa e inicia pacotes
-import pygame
-import random
+import pygame, sys, random, os
 
 pygame.init()
 
 # ----- Gera tela principal
-WIDTH = 480
-HEIGHT = 600
+WIDTH = 1024
+HEIGHT = 768
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Jetpack Joyride')
 
 # ----- Inicia assets
-PLAYER_WIDTH = 50
-PLAYER_HEIGHT = 38
+PLAYER_WIDTH = 71
+PLAYER_HEIGHT = 83
 font = pygame.font.SysFont(None, 48)
 background = pygame.image.load('assets/img/background.jpg').convert()
+ground = pygame.image.load('assets/img/background_ground.png').convert_alpha()
+background_move = pygame.image.load('assets/img/background_move.png').convert_alpha()
 player_img = pygame.image.load('assets/img/player.png').convert_alpha()
 player_img = pygame.transform.scale(player_img, (PLAYER_WIDTH, PLAYER_HEIGHT))
 raio1 = pygame.image.load('assets/img/zap1.png').convert_alpha()
 raio2 = pygame.image.load('assets/img/zap2.png').convert_alpha()
 raio3 = pygame.image.load('assets/img/zap3.png').convert_alpha()
 raio4 = pygame.image.load('assets/img/zap4.png').convert_alpha()
+raio5 = pygame.image.load('assets/img/zap5.png').convert_alpha()
+ground_scroll = 0
+scroll_speed = 5
 
 # ----- Inicia estruturas de dados
 # Definindo os novos tipos
@@ -84,22 +88,20 @@ class Raio(pygame.sprite.Sprite):
 
         self.image = img
         self.rect = self.image.get_rect()
-        self.rect.x = random.randint(PLAYER_WIDTH, WIDTH+100)
-        self.rect.y = random.randint(0, HEIGHT-PLAYER_HEIGHT)
-        self.speedx = random.randint(-20, -5)
-        #self.speedy = random.randint(2, 9)
+        self.rect.x = random.randint(0, WIDTH)
+        self.rect.y = random.randint(50, 715)
+        self.speedx = -5
 
     def update(self):
         # Atualizando a posição do meteoro
         self.rect.x += self.speedx
-        #self.rect.y += self.speedy
         # Se o meteoro passar do final da tela, volta para cima e sorteia
         # novas posições e velocidades
-        if self.rect.top > HEIGHT or self.rect.right < 0 or self.rect.left > WIDTH:
-            self.rect.x = random.randint(PLAYER_WIDTH, WIDTH+100)
-            self.rect.y = random.randint(0, HEIGHT-PLAYER_HEIGHT)
-            self.speedx = random.randint(-20, -5)
-            #self.speedy = random.randint(2, 9)
+        if self.rect.top < 50 or self.rect.bottom > 715 or self.rect.left > WIDTH:
+            self.rect.x = random.randint(0, WIDTH)
+            self.rect.y = random.randint(50, 715)
+            
+
 
 game = True
 # Variável para o ajuste de velocidade
@@ -113,7 +115,7 @@ player = Player(player_img)
 all_sprites.add(player)
 # Criando os meteoros
 raios = [raio1,raio2,raio3,raio4]
-for i in range(8):
+for _ in range(3):
     raio = Raio(random.choice(raios))
     all_sprites.add(raio)
 
@@ -129,25 +131,17 @@ while game:
         # Verifica se apertou alguma tecla.
         if event.type == pygame.KEYDOWN:
             # Dependendo da tecla, altera a velocidade.
-            if event.key == pygame.K_LEFT:
-                player.speedx -= 8
-            if event.key == pygame.K_RIGHT:
-                player.speedx += 8
             if event.key == pygame.K_UP:
-                player.speedy -= 8
-            if event.key == pygame.K_DOWN:
-                player.speedy += 8
+                player.speedy -= 15
+            # if event.key == pygame.K_DOWN:
+                # player.speedy += 8
         # Verifica se soltou alguma tecla.
         if event.type == pygame.KEYUP:
             # Dependendo da tecla, altera a velocidade.
-            if event.key == pygame.K_LEFT:
-                player.speedx += 8
-            if event.key == pygame.K_RIGHT:
-                player.speedx -= 8
             if event.key == pygame.K_UP:
-                player.speedy += 8
-            if event.key == pygame.K_DOWN:
-                player.speedy -= 8
+                player.speedy += 15
+            # if event.key == pygame.K_DOWN:
+                # player.speedy -= 8
 
     # ----- Atualiza estado do jogo
     # Atualizando a posição dos meteoros
@@ -156,6 +150,11 @@ while game:
     # ----- Gera saídas
     window.fill((0, 0, 0))  # Preenche com a cor branca
     window.blit(background, (0, 0))
+    window.blit(ground, (ground_scroll, 0))
+    ground_scroll -= scroll_speed
+    if abs(ground_scroll) > 1024:
+        ground_scroll = 0
+    
     # Desenhando meteoros
     all_sprites.draw(window)
 
