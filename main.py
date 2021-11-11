@@ -22,41 +22,47 @@ while state != QUIT:
     else:
         state = QUIT
 
-# ===== Finalização =====
+# ==== Finalização ====
 pygame.quit()  # Função do PyGame que finaliza os recursos utilizados'''
 
-# ===== Inicialização =====
-# ----- Importa e inicia pacotes
+# ==== Inicialização ====
+# ---- Importa e inicia pacotes
 import pygame, sys, random, os
 
 pygame.init()
 
-# ----- Gera tela principal
+# ---- Gera tela principal
 WIDTH = 1024
 HEIGHT = 768
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Jetpack Joyride')
 
-# ----- Inicia assets
-PLAYER_WIDTH = 91
-PLAYER_HEIGHT = 103
+# ---- Inicia assets
 font = pygame.font.SysFont(None, 48)
+# ---- Background
 background = pygame.image.load('assets/img/background.jpg').convert()
 ground = pygame.image.load('assets/img/background_ground.png').convert_alpha()
 background_move = pygame.image.load('assets/img/background_move.png').convert_alpha()
+# ---- Player
 player_img = pygame.image.load('assets/img/walk1.png').convert_alpha()
-#player_img = pygame.transform.scale(player_img, (PLAYER_WIDTH, PLAYER_HEIGHT))
+img_fly = pygame.image.load('assets/img/flying1.png').convert_alpha()
+img_jump = pygame.image.load('assets/img/beggining.png').convert_alpha()
+# ---- Obstacles
 raio1 = pygame.image.load('assets/img/zap1.png').convert_alpha()
 raio2 = pygame.image.load('assets/img/zap2.png').convert_alpha()
 raio3 = pygame.image.load('assets/img/zap3.png').convert_alpha()
 raio4 = pygame.image.load('assets/img/zap4.png').convert_alpha()
 raio5 = pygame.image.load('assets/img/zap5.png').convert_alpha()
-img_fly = pygame.image.load('assets/img/flying1.png')
+
+# ---- Setting Default Variable
 ground_scroll = 0
 scroll_speed = 5
+dead = False
+#raio_frequency = 4000 # --> Milesegundos 
+#last_raio = pygame.time.get_ticks()
 
-# ----- Inicia estruturas de dados
-# Definindo os novos tipos
+# ---- Inicia estruturas de dados
+# ---- Definindo as classes
 class Player(pygame.sprite.Sprite):
     def __init__(self, img):
         # Construtor da classe mãe (Sprite).
@@ -70,43 +76,50 @@ class Player(pygame.sprite.Sprite):
         self.images = []
         self.index = 0
         self.counter = 0
-        self.fly = [img_fly]
+        self.fly = img_fly
+        self.jump = img_jump
         for num in range(1,3):
             img2 = pygame.image.load(f'assets/img/walk{num}.png')
             self.images.append(img2)
-        self.vel=0
+        self.accel = 0
+
 
     def update(self):
-        # Atualização da posição da nave
-        self.vel+=0.5
-        if self.vel > 8:
-            self.vel = 8
-        if self.rect.bottom<=657:
-            self.rect.y+=int(self.vel)
+        if dead == False: # ---> IMPLEMENTAR FUNÇÃO DE MORTE
+            # ---- Atualização da posição do player
+            # ---- Velocidade Gravidade
+            self.accel += 0.5
+            self.accel = min(self.accel, 10)
+            
+            # ---- Velocidade Jetpack
+            self.rect.y += self.speedy
+
+                    # ---- Troca o Estilo de Voo
+            if self.accel <= 10:
+                self.image = self.jump
+            if self.speedy == -20:
+                self.image = self.fly
+
+            # ---- Jogador anda dentro dessas cordenadas
+            if self.rect.centery > 620 and self.rect.centery <= 650:
+                self.counter+= 1
+                walk_cooldown = 5
+                if self.counter > walk_cooldown:
+                    self.counter = 0
+                    self.index +=1
+                    if self.index >= len(self.images):
+                        self.index = 0
+                self.image = self.images[self.index]
+
+        # ---- Limita o Teto   
         if self.rect.top<=110:
             self.rect.y=110
-        self.rect.y += self.speedy
-        if self.rect.centery >600 and self.rect.centery<800 :
-            self.counter+= 1
-            walk_cooldown = 5
-            if self.counter > walk_cooldown:
-                self.counter = 0
-                self.index +=1
-                if self.index >= len(self.images):
-                    self.index = 0
-            self.image = self.images[self.index]
-            #if event.key == pygame.KEYUP:
-                #self.image = self.fly[0]
-        # Mantem dentro da tela
-        if self.rect.right > WIDTH:
-            self.rect.right = WIDTH
-        if self.rect.left < 0:
-            self.rect.left = 0
-        if self.rect.bottom > HEIGHT:
-            self.rect.bottom = HEIGHT
-        if self.rect.top < 0:
-            self.rect.top = 0
-        
+
+        # ---- Limita o chão 
+        if self.rect.bottom < 660:
+            self.rect.y += int(self.accel)
+
+
 
 class Raio(pygame.sprite.Sprite):
     def __init__(self, img):
@@ -115,77 +128,96 @@ class Raio(pygame.sprite.Sprite):
 
         self.image = img
         self.rect = self.image.get_rect()
-        self.rect.x = random.randint(0, WIDTH)
-        self.rect.y = random.randint(50, 715)
-        self.speedx = -5
+        self.rect.top = random.randint(110, 670)
+        self.rect.bottom = random.randint(0, 0)
+        self.rect.x = random.randint(WIDTH/2, WIDTH)
+        self.rect.y = random.randint(110, 715)
 
     def update(self):
         # Atualizando a posição do meteoro
-        self.rect.x += self.speedx
+        self.rect.x -= scroll_speed
         # Se o meteoro passar do final da tela, volta para cima e sorteia
         # novas posições e velocidades
-        if self.rect.top < 50 or self.rect.bottom > 715 or self.rect.left > WIDTH:
-            self.rect.x = random.randint(0, WIDTH)
-            self.rect.y = random.randint(50, 715)
+        if self.rect.left > WIDTH or self.rect.right < 0:
+            self.rect.x = random.randint(1024, 1536)
+            self.rect.y = random.randint(110, 630)
             
 
-
-game = True
-# Variável para o ajuste de velocidade
+# Variável para o ajuste de velocidade (FPS)
 clock = pygame.time.Clock()
-FPS = 30
+FPS = 60
 
-# Criando um grupo de meteoros
+# ---- Criando um grupo de sprites
 all_sprites = pygame.sprite.Group()
-# Criando o jogador
+all_raios = pygame.sprite.Group()
+
+# ---- Criando o jogador
 player = Player(player_img)
 all_sprites.add(player)
-# Criando os meteoros
-raios = [raio1,raio2,raio3,raio4]
-for _ in range(3):
+
+# ---- Criando os raios
+raios = [raio1, raio2, raio3, raio4, raio5]
+for _ in range(2):
     raio = Raio(random.choice(raios))
     all_sprites.add(raio)
+    all_raios.add(raio)
 
 # ===== Loop principal =====
+game = True
 while game:
     clock.tick(FPS)
 
     # ----- Trata eventos
     for event in pygame.event.get():
+        
         # ----- Verifica consequências
         if event.type == pygame.QUIT:
             game = False
+
         # Verifica se apertou alguma tecla.
         if event.type == pygame.KEYDOWN:
             # Dependendo da tecla, altera a velocidade.
             if event.key == pygame.K_UP:
-                player.speedy -= 15
-            # if event.key == pygame.K_DOWN:
-                # player.speedy += 8
+                player.speedy -= 20
+                
         # Verifica se soltou alguma tecla.
         if event.type == pygame.KEYUP:
             # Dependendo da tecla, altera a velocidade.
             if event.key == pygame.K_UP:
-                player.speedy += 15
-            # if event.key == pygame.K_DOWN:
-                # player.speedy -= 8
+                player.speedy += 20
 
-    # ----- Atualiza estado do jogo
-    # Atualizando a posição dos meteoros
+    # ---- Verifica se houve colisão entre nave e meteoro
+    hits = pygame.sprite.spritecollide(player, all_raios, False)
+
+    # Finalizar jogo se colidir player com raios - !!!IMPLEMENTAR!!!
+    if len(hits) == True:
+        dead = True
+
+    # ---- Atualiza estado do jogo 
+    # Atualizando a posição dos sprites
     all_sprites.update()
 
-    # ----- Gera saídas
-    window.fill((0, 0, 0))  # Preenche com a cor branca
+    # ---- Gera saídas
+    # ---- Faz o background se mover
     window.blit(background, (0, 0))
     window.blit(ground, (ground_scroll, 0))
-    ground_scroll -= scroll_speed
-    if abs(ground_scroll) > 1024:
-        ground_scroll = 0
     
-    # Desenhando meteoros
+    if dead == False:
+        # ---- Cria novos raios
+        #time_now = pygame.time.get_ticks()
+        #if time_now - last_raio > raio_frequency:
+                #raio = Raio(random.choice(raios))
+                #all_sprites.add(raio)
+        # ---- Faz o background se mover
+        ground_scroll -= scroll_speed
+        if abs(ground_scroll) > 1024:
+            ground_scroll = 0
+    
+    # ---- Desenhando os sprites
     all_sprites.draw(window)
 
-    pygame.display.update()  # Mostra o novo frame para o jogador
+    # ---- Mostra o novo frame para o jogador
+    pygame.display.update()  
 
 # ===== Finalização =====
 pygame.quit()  # Função do PyGame que finaliza os recursos utilizados

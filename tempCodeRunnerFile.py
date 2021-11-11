@@ -1,1 +1,1 @@
-all_sprites = pygame.sprite.Group()
+    window.fill((0, 0, 0))  # Preenche com a cor branca
