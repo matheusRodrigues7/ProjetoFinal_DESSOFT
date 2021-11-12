@@ -27,9 +27,10 @@ pygame.quit()  # Função do PyGame que finaliza os recursos utilizados'''
 
 # ==== Inicialização ====
 # ---- Importa e inicia pacotes
-import pygame, sys, random, os
+import pygame, sys, random, os, time
 
 pygame.init()
+pygame.mixer.init()
 
 # ---- Gera tela principal
 WIDTH = 1024
@@ -50,9 +51,28 @@ img_jump = pygame.image.load('assets/img/beggining.png').convert_alpha()
 # ---- Obstacles
 raio1 = pygame.image.load('assets/img/zap1.png').convert_alpha()
 raio2 = pygame.image.load('assets/img/zap2.png').convert_alpha()
-raio3 = pygame.image.load('assets/img/zap3.png').convert_alpha()
-raio4 = pygame.image.load('assets/img/zap4.png').convert_alpha()
-raio5 = pygame.image.load('assets/img/zap5.png').convert_alpha()
+#raio3 = pygame.image.load('assets/img/zap3.png').convert_alpha()
+#raio4 = pygame.image.load('assets/img/zap4.png').convert_alpha()
+raio3 = pygame.image.load('assets/img/zap5.png').convert_alpha()
+
+foguete = pygame.image.load('assets/img/foguete.png').convert_alpha()
+foguete = pygame.transform.scale(foguete, (47*3, 24*3))
+
+''''assets = {}
+assets['background'] = pygame.image.load('assets/img/background.jpg').convert()
+assets['ground'] = pygame.image.load('assets/img/background_ground.png').convert_alpha()
+assets['background_move'] = pygame.image.load('assets/img/background_move.png').convert_alpha()
+assets['img_fly'] = pygame.image.load('assets/img/flying1.png').convert_alpha()
+assets['img_jump'] = pygame.image.load('assets/img/beggining.png').convert_alpha()
+assets['raios'] = [raio1,raio2,raio3] '''
+
+# Carrega os sons do jogo
+pygame.mixer.music.load('assets/snd/tgfcoder-FrozenJam-SeamlessLoop.ogg')
+pygame.mixer.music.set_volume(0.4)
+boom_sound = pygame.mixer.Sound('assets/snd/expl3.wav')
+#destroy_sound = pygame.mixer.Sound('assets/snd/expl6.wav')
+pew_sound = pygame.mixer.Sound('assets/snd/pew.wav')
+'''assets['pew_sound'] = pygame.mixer.Sound('assets/snd/pew.wav')'''
 
 # ---- Setting Default Variable
 ground_scroll = 0
@@ -64,7 +84,7 @@ dead = False
 # ---- Inicia estruturas de dados
 # ---- Definindo as classes
 class Player(pygame.sprite.Sprite):
-    def __init__(self, img):
+    def __init__(self, img,pew_sound):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
         self.image = img
@@ -78,6 +98,8 @@ class Player(pygame.sprite.Sprite):
         self.counter = 0
         self.fly = img_fly
         self.jump = img_jump
+        self.pew_sound = pew_sound
+        
         for num in range(1,3):
             img2 = pygame.image.load(f'assets/img/walk{num}.png')
             self.images.append(img2)
@@ -87,7 +109,7 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         if dead == False: # ---> IMPLEMENTAR FUNÇÃO DE MORTE
             # ---- Atualização da posição do player
-            # ---- Velocidade Gravidade
+            # ---- Aceleração Gravidade
             self.accel += 0.5
             self.accel = min(self.accel, 10)
             
@@ -98,7 +120,7 @@ class Player(pygame.sprite.Sprite):
             if self.accel <= 10:
                 self.image = self.jump
             if self.speedy == -20:
-                self.image = self.fly
+                self.image = self.fly 
 
             # ---- Jogador anda dentro dessas cordenadas
             if self.rect.centery > 620 and self.rect.centery <= 650:
@@ -118,8 +140,9 @@ class Player(pygame.sprite.Sprite):
         # ---- Limita o chão 
         if self.rect.bottom < 660:
             self.rect.y += int(self.accel)
-
-
+    
+    def fogo(self):
+        self.pew_sound.play()
 
 class Raio(pygame.sprite.Sprite):
     def __init__(self, img):
@@ -135,9 +158,12 @@ class Raio(pygame.sprite.Sprite):
 
     def update(self):
         # Atualizando a posição do meteoro
-        self.rect.x -= scroll_speed
+        self.rect.x -= scroll_speed*2
         # Se o meteoro passar do final da tela, volta para cima e sorteia
         # novas posições e velocidades
+        #if self.rect.right < 0:
+           # self.kill()
+
         if self.rect.left > WIDTH or self.rect.right < 0:
             self.rect.x = random.randint(1024, 1536)
             self.rect.y = random.randint(110, 630)
@@ -152,18 +178,20 @@ all_sprites = pygame.sprite.Group()
 all_raios = pygame.sprite.Group()
 
 # ---- Criando o jogador
-player = Player(player_img)
+player = Player(player_img,pew_sound)
 all_sprites.add(player)
 
 # ---- Criando os raios
-raios = [raio1, raio2, raio3, raio4, raio5]
-for _ in range(2):
-    raio = Raio(random.choice(raios))
+#raios = [raio1, raio2]
+for _ in range(3):
+    #raio = Raio(random.choice(raios))
+    raio = Raio(foguete)
     all_sprites.add(raio)
     all_raios.add(raio)
 
 # ===== Loop principal =====
 game = True
+pygame.mixer.music.play(loops=-1)
 while game:
     clock.tick(FPS)
 
@@ -179,6 +207,7 @@ while game:
             # Dependendo da tecla, altera a velocidade.
             if event.key == pygame.K_UP:
                 player.speedy -= 20
+                player.fogo()
                 
         # Verifica se soltou alguma tecla.
         if event.type == pygame.KEYUP:
@@ -187,16 +216,24 @@ while game:
                 player.speedy += 20
 
     # ---- Verifica se houve colisão entre nave e meteoro
-    hits = pygame.sprite.spritecollide(player, all_raios, False)
+    
 
     # Finalizar jogo se colidir player com raios - !!!IMPLEMENTAR!!!
-    if len(hits) == True:
-        dead = True
+    #if len(hits) == True:
+        #dead = True
 
     # ---- Atualiza estado do jogo 
     # Atualizando a posição dos sprites
     all_sprites.update()
 
+
+    hits = pygame.sprite.spritecollide(player, all_raios, True)
+    if len(hits) > 0:
+        dead = True
+        boom_sound.play()
+        time.sleep(1) # Precisa esperar senão fecha
+        game = False
+        
     # ---- Gera saídas
     # ---- Faz o background se mover
     window.blit(background, (0, 0))
