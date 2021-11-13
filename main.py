@@ -41,7 +41,7 @@ pygame.display.set_caption('Jetpack Joyride')
 # ---- Inicia assets
 font = pygame.font.SysFont(None, 48)
 # ---- Background
-background = pygame.image.load('assets/img/background.jpg').convert()
+'''background = pygame.image.load('assets/img/background.jpg').convert()
 ground = pygame.image.load('assets/img/background_ground.png').convert_alpha()
 background_move = pygame.image.load('assets/img/background_move.png').convert_alpha()
 # ---- Player
@@ -51,20 +51,19 @@ img_jump = pygame.image.load('assets/img/beggining.png').convert_alpha()
 # ---- Obstacles
 raio1 = pygame.image.load('assets/img/zap1.png').convert_alpha()
 raio2 = pygame.image.load('assets/img/zap2.png').convert_alpha()
-#raio3 = pygame.image.load('assets/img/zap3.png').convert_alpha()
-#raio4 = pygame.image.load('assets/img/zap4.png').convert_alpha()
-raio3 = pygame.image.load('assets/img/zap5.png').convert_alpha()
+raio3 = pygame.image.load('assets/img/zap3.png').convert_alpha()
+raio4 = pygame.image.load('assets/img/zap4.png').convert_alpha()
+raio3 = pygame.image.load('assets/img/zap5.png').convert_alpha()'''
 
-foguete = pygame.image.load('assets/img/foguete.png').convert_alpha()
-foguete = pygame.transform.scale(foguete, (47*3, 24*3))
-
-''''assets = {}
+assets = {}
 assets['background'] = pygame.image.load('assets/img/background.jpg').convert()
 assets['ground'] = pygame.image.load('assets/img/background_ground.png').convert_alpha()
 assets['background_move'] = pygame.image.load('assets/img/background_move.png').convert_alpha()
+assets['player_img'] = pygame.image.load('assets/img/walk1.png').convert_alpha()
 assets['img_fly'] = pygame.image.load('assets/img/flying1.png').convert_alpha()
 assets['img_jump'] = pygame.image.load('assets/img/beggining.png').convert_alpha()
-assets['raios'] = [raio1,raio2,raio3] '''
+assets['rocket_img'] = pygame.image.load('assets/img/foguete.png').convert_alpha()
+assets['rocket_img'] = pygame.transform.scale(assets['rocket_img'], (47*3, 24*3))
 
 # Carrega os sons do jogo
 pygame.mixer.music.load('assets/snd/tgfcoder-FrozenJam-SeamlessLoop.ogg')
@@ -72,7 +71,7 @@ pygame.mixer.music.set_volume(0.4)
 boom_sound = pygame.mixer.Sound('assets/snd/expl3.wav')
 #destroy_sound = pygame.mixer.Sound('assets/snd/expl6.wav')
 pew_sound = pygame.mixer.Sound('assets/snd/pew.wav')
-'''assets['pew_sound'] = pygame.mixer.Sound('assets/snd/pew.wav')'''
+assets['pew_sound'] = pygame.mixer.Sound('assets/snd/pew.wav')
 
 # ---- Setting Default Variable
 ground_scroll = 0
@@ -84,21 +83,22 @@ dead = False
 # ---- Inicia estruturas de dados
 # ---- Definindo as classes
 class Player(pygame.sprite.Sprite):
-    def __init__(self, img,pew_sound):
+    def __init__(self,groups,assets):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
-        self.image = img
+        self.image = assets['player_img']
         self.rect = self.image.get_rect()
         self.rect.centery = 625
-        self.rect
         self.rect.left = 80
         self.speedy = 0
         self.images = []
         self.index = 0
         self.counter = 0
-        self.fly = img_fly
-        self.jump = img_jump
-        self.pew_sound = pew_sound
+        self.fly = assets['img_fly']
+        self.jump = assets['img_jump']
+        self.groups = groups
+        self.assets = assets
+        #self.pew_sound = pew_sound
         
         for num in range(1,3):
             img2 = pygame.image.load(f'assets/img/walk{num}.png')
@@ -142,14 +142,14 @@ class Player(pygame.sprite.Sprite):
             self.rect.y += int(self.accel)
     
     def fogo(self):
-        self.pew_sound.play()
+        self.assets['pew_sound'].play()
 
 class Raio(pygame.sprite.Sprite):
-    def __init__(self, img):
+    def __init__(self,assets):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = img
+        self.image = assets['rocket_img']
         self.rect = self.image.get_rect()
         self.rect.top = random.randint(110, 670)
         self.rect.bottom = random.randint(0, 0)
@@ -158,7 +158,7 @@ class Raio(pygame.sprite.Sprite):
 
     def update(self):
         # Atualizando a posição do meteoro
-        self.rect.x -= scroll_speed*2
+        self.rect.x -= scroll_speed*3
         # Se o meteoro passar do final da tela, volta para cima e sorteia
         # novas posições e velocidades
         #if self.rect.right < 0:
@@ -175,19 +175,23 @@ FPS = 60
 
 # ---- Criando um grupo de sprites
 all_sprites = pygame.sprite.Group()
-all_raios = pygame.sprite.Group()
+all_rockets = pygame.sprite.Group()
+
+groups = {}
+groups['all_sprites'] = all_sprites
+groups['all_rockets'] = all_rockets
 
 # ---- Criando o jogador
-player = Player(player_img,pew_sound)
+player = Player(groups,assets)
 all_sprites.add(player)
 
 # ---- Criando os raios
 #raios = [raio1, raio2]
 for _ in range(3):
     #raio = Raio(random.choice(raios))
-    raio = Raio(foguete)
-    all_sprites.add(raio)
-    all_raios.add(raio)
+    rocket = Raio(assets)
+    all_sprites.add(rocket)
+    all_rockets.add(rocket)
 
 # ===== Loop principal =====
 game = True
@@ -227,7 +231,7 @@ while game:
     all_sprites.update()
 
 
-    hits = pygame.sprite.spritecollide(player, all_raios, True)
+    hits = pygame.sprite.spritecollide(player, all_rockets, True)
     if len(hits) > 0:
         dead = True
         boom_sound.play()
@@ -236,8 +240,8 @@ while game:
         
     # ---- Gera saídas
     # ---- Faz o background se mover
-    window.blit(background, (0, 0))
-    window.blit(ground, (ground_scroll, 0))
+    window.blit(assets['background'], (0, 0))
+    window.blit(assets['ground'], (ground_scroll, 0))
     
     if dead == False:
         # ---- Cria novos raios
