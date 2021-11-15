@@ -1,5 +1,5 @@
 import pygame
-from config import FPS, SCROLL_SPEED 
+from config import FPS, SCROLL_SPEED, FINAL
 from assets import load_assets, DESTROY_SOUND, BOOM_SOUND, BACKGROUND, GROUND, SCORE_FONT
 from sprites import Player, Rocket, Bullet, Explosion
 from time import sleep
@@ -72,7 +72,7 @@ def game_screen(window):
                 all_rockets.add(r)
                 explosao = Explosion(rocket.rect.center, assets)
                 all_sprites.add(explosao)
-                score += 100
+                '''score += 100'''
                 
             # ---- Verifica se houve colisão entre player e foguete
             hits = pygame.sprite.spritecollide(player, all_rockets, True, pygame.sprite.collide_mask)
@@ -82,7 +82,8 @@ def game_screen(window):
                 sleep(1) # Precisa esperar senão fecha
                 state = EXPLODING
         elif state == EXPLODING:
-            state = DONE
+            state = FINAL
+            break
         # ---- Setting Default Variable
         dead = False
         # ---- Gera saídas
@@ -102,9 +103,11 @@ def game_screen(window):
         # ---- Desenhando os sprites
         all_sprites.draw(window)
         # desenhando o placar
-        text_surface = assets[SCORE_FONT].render("{:08d}".format(int(score)), True, (255, 255, 0))
+        text_surface = assets[SCORE_FONT].render("{:04d}M".format(int(score)), True, (255, 255, 0))
         text_rect = text_surface.get_rect()
-        text_rect.midtop = (60,  10)
+        text_rect.midtop = (80,  10)
         window.blit(text_surface, text_rect)
         # ---- Mostra o novo frame para o jogador
         pygame.display.update()
+    
+    return state
