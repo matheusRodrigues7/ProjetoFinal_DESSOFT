@@ -117,6 +117,7 @@ class Player(pygame.sprite.Sprite):
 
 
     def update(self):
+        dead = False
         if dead == False: # ---> IMPLEMENTAR FUNÇÃO DE MORTE
             # ---- Atualização da posição do player
             # ---- Aceleração Gravidade
@@ -167,6 +168,7 @@ class Rocket(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         self.image = assets['rocket_img']
+        self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.top = random.randint(110, 670)
         self.rect.bottom = random.randint(0, 0)
@@ -257,6 +259,7 @@ class Explosion(pygame.sprite.Sprite):
 # Variável para o ajuste de velocidade (FPS)
 clock = pygame.time.Clock()
 FPS = 60
+assets = load_assets()
 
 # ---- Criando um grupo de sprites
 all_sprites = pygame.sprite.Group()
@@ -269,6 +272,7 @@ groups['all_rockets'] = all_rockets
 groups['all_bullets'] = all_bullets
 
 # ---- Criando o jogador
+assets = load_assets
 player = Player(groups,assets)
 all_sprites.add(player)
 
