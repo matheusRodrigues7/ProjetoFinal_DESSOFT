@@ -27,33 +27,19 @@ pygame.quit()  # Função do PyGame que finaliza os recursos utilizados'''
 
 # ==== Inicialização ====
 # ---- Importa e inicia pacotes
-import pygame, sys, random, os, time
+import pygame
+import random
+from config import WIDTH, HEIGHT, INIT, GAME, QUIT
+from init_screen import init_screen
+from game_screen import game_screen
+from time import sleep
 
 pygame.init()
 pygame.mixer.init()
 
 # ---- Gera tela principal
-WIDTH = 1024
-HEIGHT = 768
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Jetpack Joyride')
-
-# ---- Inicia assets
-font = pygame.font.SysFont(None, 48)
-# ---- Background
-'''background = pygame.image.load('assets/img/background.jpg').convert()
-ground = pygame.image.load('assets/img/background_ground.png').convert_alpha()
-background_move = pygame.image.load('assets/img/background_move.png').convert_alpha()
-# ---- Player
-player_img = pygame.image.load('assets/img/walk1.png').convert_alpha()
-img_fly = pygame.image.load('assets/img/flying1.png').convert_alpha()
-img_jump = pygame.image.load('assets/img/beggining.png').convert_alpha()
-# ---- Obstacles
-Rocket1 = pygame.image.load('assets/img/zap1.png').convert_alpha()
-Rocket2 = pygame.image.load('assets/img/zap2.png').convert_alpha()
-Rocket3 = pygame.image.load('assets/img/zap3.png').convert_alpha()
-Rocket4 = pygame.image.load('assets/img/zap4.png').convert_alpha()
-Rocket3 = pygame.image.load('assets/img/zap5.png').convert_alpha()'''
 
 def load_assets():
     assets = {}
@@ -84,9 +70,6 @@ def load_assets():
     return assets
 
 # ---- Setting Default Variable
-ground_scroll = 0
-scroll_speed = 5
-dead = False
 #Rocket_frequency = 4000 # --> Milesegundos 
 #last_Rocket = pygame.time.get_ticks()
 
@@ -97,6 +80,7 @@ class Player(pygame.sprite.Sprite):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
         self.image = assets['player_img']
+        self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centery = 625
         self.rect.left = 80
@@ -195,8 +179,8 @@ class Bullet(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         self.image = assets['bullet_img']
-        self.rect = self.image.get_rect()
         self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
         # Coloca no lugar inicial definido em x, y do constutor
         self.rect.centery = centery
         self.rect.left = left
@@ -257,7 +241,8 @@ class Explosion(pygame.sprite.Sprite):
                 self.rect.center = center
     
 def game_screen(window):
-    
+    clock = pygame.time.Clock()
+    FPS = 60
 
     assets = load_assets()
     # Variável para o ajuste de velocidade (FPS)
@@ -287,9 +272,8 @@ def game_screen(window):
     EXPLODING = 2
     state = PLAYING
     score = 0
-    
-    clock = pygame.time.Clock()
-    FPS = 60
+
+    ground_scroll = 0
 
     # ===== Loop principal =====
     pygame.mixer.music.play(loops=-1)
@@ -338,7 +322,7 @@ def game_screen(window):
             if len(hits) > 0:
                 dead = True
                 assets['boom_sound'].play()
-                time.sleep(1) # Precisa esperar senão fecha
+                sleep(1) # Precisa esperar senão fecha
                 state = EXPLODING
         elif state == EXPLODING:
             state = DONE
@@ -347,7 +331,7 @@ def game_screen(window):
         # ---- Gera saídas
         # ---- Faz o background se mover
         window.blit(assets['background'], (0, 0))
-        window.blit(assets['ground'], (assets['ground_scroll'], 0))
+        window.blit(assets['ground'], (ground_scroll, 0))
         if dead == False:
             # ---- Cria novos Rockets
             #time_now = pygame.time.get_ticks()
@@ -355,9 +339,9 @@ def game_screen(window):
                     #Rocket = Rocket(random.choice(Rockets))
                     #all_sprites.add(Rocket)
             # ---- Faz o background se mover
-            assets['ground_scroll'] -= assets['scroll_speed']
-            if abs(assets['ground_scroll']) > 1024:
-                assets['ground_scroll'] = 0
+            ground_scroll -= assets['scroll_speed']
+            if abs(ground_scroll) > 1024:
+                ground_scroll = 0
         # ---- Desenhando os sprites
         all_sprites.draw(window)
         # desenhando o placar

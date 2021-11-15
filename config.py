@@ -1,16 +1,20 @@
 from os import path
 
-WIDTH = 600
-HEIGHT = 450
+WIDTH = 1024
+HEIGHT = 768
 FPS = 60
 
 # Estabelece a pasta que contem as figuras e sons.
 IMG_DIR = path.join(path.dirname(__file__), 'assets', 'img')
 SND_DIR = path.join(path.dirname(__file__), 'assets', 'snd')
+FNT_DIR = path.join(path.dirname(__file__), 'assets', 'font')
 
 # Define tamanhos
-PLAYER_WIDTH = 50
-PLAYER_HEIGHT = 38
+ROCKET_WIDTH = 47*3
+ROCKET_HEIGHT = 24*3
+
+# Para a tela se mover
+SCROLL_SPEED = 5
 
 # Define algumas variáveis com as cores básicas
 WHITE = (255, 255, 255)
