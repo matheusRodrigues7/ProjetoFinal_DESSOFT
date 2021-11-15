@@ -172,7 +172,7 @@ class Rocket(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.top = random.randint(110, 670)
         self.rect.bottom = random.randint(0, 0)
-        self.rect.x = random.randint(WIDTH/3, WIDTH)
+        self.rect.x = 1024
         self.rect.y = random.randint(110, 715)
 
     def update(self):
@@ -201,7 +201,7 @@ class Bullet(pygame.sprite.Sprite):
         self.rect.centery = centery
         self.rect.left = left
         self.speedx = 10  # Velocidade fixa para a direita
-
+        
     def update(self):
         # A bala só se move no eixo x
         self.rect.x += self.speedx
