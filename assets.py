@@ -33,7 +33,7 @@ def load_assets():
         img = pygame.transform.scale(img, (90, 90))
         explosion_anim.append(img)
     assets[EXPLOSION_ANIM] = explosion_anim
-    assets[SCORE_FONT] = pygame.font.Font(os.path.join(FNT_DIR, 'NewAthleticM54.ttf'), 28)
+    assets[SCORE_FONT] = pygame.font.Font(os.path.join(FNT_DIR, 'NewAthleticM54.ttf'), 40)
 
     # Carrega os sons do jogo
     pygame.mixer.music.load('assets/snd/tgfcoder-FrozenJam-SeamlessLoop.ogg')
