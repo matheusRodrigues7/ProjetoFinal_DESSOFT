@@ -255,12 +255,10 @@ class Explosion(pygame.sprite.Sprite):
                 self.image = self.explosion_anim[self.frame]
                 self.rect = self.image.get_rect()
                 self.rect.center = center
-
+    
 def game_screen(window):
-    # Variável para o ajuste de velocidade (FPS)
-    clock = pygame.time.Clock()
-    FPS = 60
     assets = load_assets()
+    # Variável para o ajuste de velocidade (FPS)
     # ---- Criando um grupo de sprites
     all_sprites = pygame.sprite.Group()
     all_rockets = pygame.sprite.Group()
@@ -286,8 +284,9 @@ def game_screen(window):
     PLAYING = 1
     EXPLODING = 2
     state = PLAYING
-    score = 0
-
+    score = 100
+    clock = pygame.time.Clock()
+    FPS = 60
     # ===== Loop principal =====
     game = True
     pygame.mixer.music.play(loops=-1)
@@ -330,6 +329,7 @@ def game_screen(window):
                     explosao = Explosion(rocket.rect.center, assets)
                     all_sprites.add(explosao)
                     score += 100
+                    
                 # ---- Verifica se houve colisão entre player e foguete
                 hits = pygame.sprite.spritecollide(player, all_rockets, True, pygame.sprite.collide_mask)
                 if len(hits) > 0:
@@ -358,12 +358,14 @@ def game_screen(window):
             # ---- Desenhando os sprites
             all_sprites.draw(window)
             # desenhando o placar
-            text_surface = assets['score_font'].render("{:08d}".format(score), True, (255, 255, 0))
+            text_surface = assets['score_font'].render("{:08d}".format(score-100), True, (255, 255, 0))
             text_rect = text_surface.get_rect()
             text_rect.midtop = (60,  10)
             window.blit(text_surface, text_rect)
             # ---- Mostra o novo frame para o jogador
             pygame.display.update()
+            if score+100 % 500 == 0:
+                FPS +=15
 game_screen(window)
 # ===== Finalização =====
 pygame.quit()  # Função do PyGame que finaliza os recursos utilizados
