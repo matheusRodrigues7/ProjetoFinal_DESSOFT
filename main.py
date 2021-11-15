@@ -177,7 +177,7 @@ class Rocket(pygame.sprite.Sprite):
 
     def update(self):
         # Atualizando a posição do meteoro
-        self.rect.x -= scroll_speed*3
+        self.rect.x -= 15
         # Se o meteoro passar do final da tela, volta para cima e sorteia
         # novas posições e velocidades
         #if self.rect.right < 0:
@@ -196,7 +196,7 @@ class Bullet(pygame.sprite.Sprite):
 
         self.image = assets['bullet_img']
         self.rect = self.image.get_rect()
-
+        self.mask = pygame.mask.from_surface(self.image)
         # Coloca no lugar inicial definido em x, y do constutor
         self.rect.centery = centery
         self.rect.left = left
@@ -256,23 +256,21 @@ class Explosion(pygame.sprite.Sprite):
                 self.rect = self.image.get_rect()
                 self.rect.center = center
 
-# Variável para o ajuste de velocidade (FPS)
-clock = pygame.time.Clock()
-FPS = 60
-assets = load_assets()
-
-# ---- Criando um grupo de sprites
-all_sprites = pygame.sprite.Group()
-all_rockets = pygame.sprite.Group()
-all_bullets = pygame.sprite.Group()
-
-groups = {}
-groups['all_sprites'] = all_sprites
-groups['all_rockets'] = all_rockets
-groups['all_bullets'] = all_bullets
+def game_screen(window):
+    # Variável para o ajuste de velocidade (FPS)
+    clock = pygame.time.Clock()
+    FPS = 60
+    assets = load_assets()
+    # ---- Criando um grupo de sprites
+    all_sprites = pygame.sprite.Group()
+    all_rockets = pygame.sprite.Group()
+    all_bullets = pygame.sprite.Group()
+    groups = {}
+    groups['all_sprites'] = all_sprites
+    groups['all_rockets'] = all_rockets
+    groups['all_bullets'] = all_bullets
 
 # ---- Criando o jogador
-assets = load_assets
 player = Player(groups,assets)
 all_sprites.add(player)
 
@@ -284,10 +282,11 @@ for _ in range(3):
     all_sprites.add(rocket)
     all_rockets.add(rocket)
 
-'''DONE = 0
+DONE = 0
 PLAYING = 1
 EXPLODING = 2
-state = PLAYING'''
+state = PLAYING
+score = 0
 
 # ===== Loop principal =====
 game = True
