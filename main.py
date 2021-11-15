@@ -257,6 +257,8 @@ class Explosion(pygame.sprite.Sprite):
                 self.rect.center = center
     
 def game_screen(window):
+    
+
     assets = load_assets()
     # Variável para o ajuste de velocidade (FPS)
     # ---- Criando um grupo de sprites
@@ -284,88 +286,89 @@ def game_screen(window):
     PLAYING = 1
     EXPLODING = 2
     state = PLAYING
-    score = 100
+    score = 0
+    
     clock = pygame.time.Clock()
     FPS = 60
+
     # ===== Loop principal =====
-    game = True
     pygame.mixer.music.play(loops=-1)
     while state != DONE:
-            clock.tick(FPS)
-            # ----- Trata eventos
-            for event in pygame.event.get():
-                # ----- Verifica consequências
-                if event.type == pygame.QUIT:
-                    state = DONE
-                if state == PLAYING:
-                    # Verifica se apertou alguma tecla.
-                    if event.type == pygame.KEYDOWN:
-                        # Dependendo da tecla, altera a velocidade.
-                        if event.key == pygame.K_UP:
-                            player.speedy -= 20
-                            player.fogo()
-                        if event.key == pygame.K_SPACE:
-                            player.shoot()
-                    # Verifica se soltou alguma tecla.
-                    if event.type == pygame.KEYUP:
-                        # Dependendo da tecla, altera a velocidade.
-                        if event.key == pygame.K_UP:
-                            player.speedy += 20
-            # Finalizar jogo se colidir player com Rockets - !!!IMPLEMENTAR!!!
-            #if len(hits) == True:
-                #dead = True
-            # ---- Atualiza estado do jogo 
-            # Atualizando a posição dos sprites
-            all_sprites.update()
-            if state == PLAYING:
-                # Verifica se houve colisão entre tiro e foguete
-                hits = pygame.sprite.groupcollide(all_rockets, all_bullets, True, True, pygame.sprite.collide_mask)
-                for rocket in hits: # As chaves são os elementos do primeiro grupo (rockets) que colidiram com alguma bala
-                    # O meteoro e destruido e precisa ser recriado
-                    assets['destroy_sound'].play()
-                    r = Rocket(assets)
-                    all_sprites.add(r)
-                    all_rockets.add(r)
-                    explosao = Explosion(rocket.rect.center, assets)
-                    all_sprites.add(explosao)
-                    score += 100
-                    
-                # ---- Verifica se houve colisão entre player e foguete
-                hits = pygame.sprite.spritecollide(player, all_rockets, True, pygame.sprite.collide_mask)
-                if len(hits) > 0:
-                    dead = True
-                    assets['boom_sound'].play()
-                    time.sleep(1) # Precisa esperar senão fecha
-                    state = EXPLODING
-            elif state == EXPLODING:
+        #print(FPS)
+        clock.tick(FPS)
+        #score += clock.tick(FPS) / FPS        
+        # ----- Trata eventos
+        for event in pygame.event.get():
+            # ----- Verifica consequências
+            if event.type == pygame.QUIT:
                 state = DONE
-            # ---- Setting Default Variable
-            dead = False
-            # ---- Gera saídas
+            if state == PLAYING:
+                # Verifica se apertou alguma tecla.
+                if event.type == pygame.KEYDOWN:
+                    # Dependendo da tecla, altera a velocidade.
+                    if event.key == pygame.K_UP:
+                        player.speedy -= 20
+                        player.fogo()
+                    if event.key == pygame.K_SPACE:
+                        player.shoot()
+                # Verifica se soltou alguma tecla.
+                if event.type == pygame.KEYUP:
+                    # Dependendo da tecla, altera a velocidade.
+                    if event.key == pygame.K_UP:
+                        player.speedy += 20
+        # Finalizar jogo se colidir player com Rockets - !!!IMPLEMENTAR!!!
+        #if len(hits) == True:
+            #dead = True
+        # ---- Atualiza estado do jogo 
+        # Atualizando a posição dos sprites
+        all_sprites.update()
+        if state == PLAYING:
+            # Verifica se houve colisão entre tiro e foguete
+            hits = pygame.sprite.groupcollide(all_rockets, all_bullets, True, True, pygame.sprite.collide_mask)
+            for rocket in hits: # As chaves são os elementos do primeiro grupo (rockets) que colidiram com alguma bala
+                # O meteoro e destruido e precisa ser recriado
+                assets['destroy_sound'].play()
+                r = Rocket(assets)
+                all_sprites.add(r)
+                all_rockets.add(r)
+                explosao = Explosion(rocket.rect.center, assets)
+                all_sprites.add(explosao)
+                score += 100
+                
+            # ---- Verifica se houve colisão entre player e foguete
+            hits = pygame.sprite.spritecollide(player, all_rockets, True, pygame.sprite.collide_mask)
+            if len(hits) > 0:
+                dead = True
+                assets['boom_sound'].play()
+                time.sleep(1) # Precisa esperar senão fecha
+                state = EXPLODING
+        elif state == EXPLODING:
+            state = DONE
+        # ---- Setting Default Variable
+        dead = False
+        # ---- Gera saídas
+        # ---- Faz o background se mover
+        window.blit(assets['background'], (0, 0))
+        window.blit(assets['ground'], (assets['ground_scroll'], 0))
+        if dead == False:
+            # ---- Cria novos Rockets
+            #time_now = pygame.time.get_ticks()
+            #if time_now - last_Rocket > Rocket_frequency:
+                    #Rocket = Rocket(random.choice(Rockets))
+                    #all_sprites.add(Rocket)
             # ---- Faz o background se mover
-            window.blit(assets['background'], (0, 0))
-            window.blit(assets['ground'], (assets['ground_scroll'], 0))
-            if dead == False:
-                # ---- Cria novos Rockets
-                #time_now = pygame.time.get_ticks()
-                #if time_now - last_Rocket > Rocket_frequency:
-                        #Rocket = Rocket(random.choice(Rockets))
-                        #all_sprites.add(Rocket)
-                # ---- Faz o background se mover
-                assets['ground_scroll'] -= assets['scroll_speed']
-                if abs(assets['ground_scroll']) > 1024:
-                    assets['ground_scroll'] = 0
-            # ---- Desenhando os sprites
-            all_sprites.draw(window)
-            # desenhando o placar
-            text_surface = assets['score_font'].render("{:08d}".format(score-100), True, (255, 255, 0))
-            text_rect = text_surface.get_rect()
-            text_rect.midtop = (60,  10)
-            window.blit(text_surface, text_rect)
-            # ---- Mostra o novo frame para o jogador
-            pygame.display.update()
-            if score+100 % 500 == 0:
-                FPS +=15
+            assets['ground_scroll'] -= assets['scroll_speed']
+            if abs(assets['ground_scroll']) > 1024:
+                assets['ground_scroll'] = 0
+        # ---- Desenhando os sprites
+        all_sprites.draw(window)
+        # desenhando o placar
+        text_surface = assets['score_font'].render("{:08d}".format(int(score)), True, (255, 255, 0))
+        text_rect = text_surface.get_rect()
+        text_rect.midtop = (60,  10)
+        window.blit(text_surface, text_rect)
+        # ---- Mostra o novo frame para o jogador
+        pygame.display.update()
 game_screen(window)
 # ===== Finalização =====
 pygame.quit()  # Função do PyGame que finaliza os recursos utilizados
