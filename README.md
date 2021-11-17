@@ -16,10 +16,10 @@
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
 - [x] Iniciar o jogo
-- [ ] Implementar Fisica
-- [ ] Tarefa 3
-- [ ] Tarefa 4
-- [ ] Tarefa 5
+- [x] Implementar Fisica
+- [ ] Terminar Tela de morte
+- [ ] Melhorar efeitos sonoros e visuais
+- [ ] Terminar acabamento final
 
 ## 🤝 Colaboradores
 
