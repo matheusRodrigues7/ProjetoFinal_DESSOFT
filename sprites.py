@@ -1,7 +1,7 @@
 import random
 import pygame
 from config import WIDTH #, HEIGHT, ROCKET_WIDTH, ROCKET_HEIGHT
-from assets import PLAYER_IMG, FLY_IMG, JUMP_IMG, PEW_SOUND, ROCKET_IMG, BULLET_IMG, EXPLOSION_ANIM
+from assets import PLAYER_IMG, FLY_IMG, JUMP_IMG, PEW_SOUND, ROCKET_IMG, BULLET_IMG, EXPLOSION_ANIM, FIRE_SOUND
 
 # ---- Inicia estruturas de dados
 # ---- Definindo as classes
@@ -67,7 +67,7 @@ class Player(pygame.sprite.Sprite):
             self.rect.y += int(self.accel)
     
     def fogo(self):
-        self.assets[PEW_SOUND].play()
+        self.assets[FIRE_SOUND].play()
     
     def shoot(self):
         # A nova bala vai ser criada logo acima e no centro horizontal da nave

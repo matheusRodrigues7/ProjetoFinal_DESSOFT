@@ -12,6 +12,8 @@ FNT_DIR = path.join(path.dirname(__file__), 'assets', 'font')
 # Define tamanhos
 ROCKET_WIDTH = 202
 ROCKET_HEIGHT = 66
+SANDMANN_WIDTH = 55
+SANDMANN_HEIGHT = 55
 
 # Para a tela se mover
 SCROLL_SPEED = 5

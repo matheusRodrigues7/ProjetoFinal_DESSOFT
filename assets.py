@@ -1,6 +1,6 @@
 import pygame
 import os
-from config import ROCKET_WIDTH, ROCKET_HEIGHT, IMG_DIR, SND_DIR, FNT_DIR
+from config import ROCKET_WIDTH, ROCKET_HEIGHT, SANDMANN_WIDTH, SANDMANN_HEIGHT, IMG_DIR, SND_DIR, FNT_DIR
 
 BACKGROUND = 'background'
 GROUND = 'ground'
@@ -15,6 +15,7 @@ SCORE_FONT_FINAL = 'score_font_final'
 BOOM_SOUND = 'boom_sound'
 DESTROY_SOUND = 'destroy_sound'
 PEW_SOUND = 'pew_sound'
+FIRE_SOUND = 'fire_sound'
 
 def load_assets():
     assets = {}
@@ -26,7 +27,7 @@ def load_assets():
     assets[ROCKET_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'foguete.png')).convert_alpha()
     assets[ROCKET_IMG] = pygame.transform.scale(assets['rocket_img'], (ROCKET_WIDTH, ROCKET_HEIGHT))
     assets[BULLET_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'star.png')).convert_alpha()
-    assets[BULLET_IMG] = pygame.transform.scale(assets['bullet_img'], (47, 47)).convert_alpha()
+    assets[BULLET_IMG] = pygame.transform.scale(assets['bullet_img'], (SANDMANN_WIDTH, SANDMANN_HEIGHT)).convert_alpha()
     explosion_anim = []
     for i in range(9):
         filename = os.path.join(IMG_DIR, f'exp{i}.png')
@@ -39,9 +40,10 @@ def load_assets():
 
     # Carrega os sons do jogo
     pygame.mixer.music.load('assets/snd/Speed.wav')
-    pygame.mixer.music.set_volume(0.4)
+    pygame.mixer.music.set_volume(0.1)
     assets[BOOM_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'expl3.wav'))
     assets[DESTROY_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'expl6.wav'))
     assets[PEW_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'pew.wav'))
+    assets[FIRE_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'pew2.wav'))
     
     return assets
