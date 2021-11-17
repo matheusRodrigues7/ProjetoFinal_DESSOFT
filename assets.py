@@ -11,6 +11,7 @@ ROCKET_IMG = 'rocket_img'
 BULLET_IMG = 'bullet_img'
 EXPLOSION_ANIM = 'explosion_anim'
 SCORE_FONT = 'score_font'
+SCORE_FONT_FINAL = 'score_font_final'
 BOOM_SOUND = 'boom_sound'
 DESTROY_SOUND = 'destroy_sound'
 PEW_SOUND = 'pew_sound'
@@ -34,6 +35,7 @@ def load_assets():
         explosion_anim.append(img)
     assets[EXPLOSION_ANIM] = explosion_anim
     assets[SCORE_FONT] = pygame.font.Font(os.path.join(FNT_DIR, 'NewAthleticM54.ttf'), 40)
+    assets[SCORE_FONT_FINAL] = pygame.font.Font(os.path.join(FNT_DIR, 'NewAthleticM54.ttf'), 100)
 
     # Carrega os sons do jogo
     pygame.mixer.music.load('assets/snd/tgfcoder-FrozenJam-SeamlessLoop.ogg')

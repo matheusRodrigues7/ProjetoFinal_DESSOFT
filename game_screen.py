@@ -35,7 +35,8 @@ def game_screen(window):
     # ===== Loop principal =====
     pygame.mixer.music.play(loops=-1)
     while state != DONE:
-        score += clock.tick(FPS) / FPS        
+        clock.tick(FPS)
+        score += 1        
         # ----- Trata eventos
         for event in pygame.event.get():
             # ----- Verifica consequências
@@ -110,4 +111,4 @@ def game_screen(window):
         # ---- Mostra o novo frame para o jogador
         pygame.display.update()
     
-    return state
+    return state, score

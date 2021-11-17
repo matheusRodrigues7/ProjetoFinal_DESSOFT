@@ -14,14 +14,15 @@ pygame.mixer.init()
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Jetpack Joyride')
 
+score = 0
 state = INIT
 while state != QUIT:
     if state == INIT:
         state = init_screen(window)
     elif state == GAME:
-        state = game_screen(window)
+        state,score = game_screen(window)
     elif state == FINAL:
-        state = final_screen(window)
+        state = final_screen(window,score)
     else:
         state = QUIT
 

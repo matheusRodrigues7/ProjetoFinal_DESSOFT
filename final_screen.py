@@ -1,12 +1,12 @@
 import pygame
 import random
 from os import path
-from assets import BACKGROUND, load_assets, SCORE_FONT
+from assets import BACKGROUND, load_assets, SCORE_FONT_FINAL
 from config import IMG_DIR, BLACK, FPS, GAME, QUIT
 from game_screen import game_screen
 
 
-def final_screen(screen):
+def final_screen(screen,score):
     # Variável para o ajuste de velocidade
     clock = pygame.time.Clock()
 
@@ -38,9 +38,9 @@ def final_screen(screen):
 
         screen.blit(background, background_rect)
 
-        text_surface = assets[SCORE_FONT].render('SCORE', True, (255, 255, 0))
+        text_surface = assets[SCORE_FONT_FINAL].render(f'{str(score)}M ', True, (255, 255, 0))
         text_rect = text_surface.get_rect()
-        text_rect.midtop = (250,  180)
+        text_rect.midtop = (250,  150)
         screen.blit(text_surface, text_rect)
 
         # Depois de desenhar tudo, inverte o display.
