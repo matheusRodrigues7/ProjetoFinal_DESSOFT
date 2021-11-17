@@ -14,7 +14,7 @@ def final_screen(screen,score):
     clock = pygame.time.Clock()
 
     # Carrega o fundo da tela inicial
-    background = pygame.image.load(path.join(IMG_DIR, 'morte.png')).convert()
+    background = pygame.image.load(path.join(IMG_DIR, 'morte.png')).convert_alpha()
     background_rect = background.get_rect()
 
     running = True
@@ -47,6 +47,18 @@ def final_screen(screen,score):
                     state = GAME
                     running = False
         mouse = pygame.mouse.get_pos()
+        
+        # A cada loop, redesenha o fundo e os sprites
+        screen.fill(BLACK)
+        
+        screen.blit(assets[BACKGROUND], background_rect)
+
+        screen.blit(background, background_rect)
+
+        text_surface = assets[SCORE_FONT_FINAL].render(f'{str(score)}M ', True, (255, 255, 0))
+        text_rect = text_surface.get_rect()
+        text_rect.midtop = (250,  150)
+        screen.blit(text_surface, text_rect)
 
         if 524 <= mouse[0] <= 524+365 and 320 <= mouse[1] <= 320+155: 
             pygame.draw.rect(screen,color_light,[524,320,365,155]) 
@@ -60,27 +72,19 @@ def final_screen(screen,score):
         else: 
             pygame.draw.rect(screen,color_dark,[524,528,450,158])
         
-        screen.blit(text , (640.5,350.5)) 
+        screen.blit(text , (640.5,350.5))
         screen.blit(text2 , (570.5,560.5))
         text_surface = assets[SCORE_FONT_FINAL].render(f'{str(score)}M ', True, (255, 255, 0))
         text_rect = text_surface.get_rect()
         text_rect.midtop = (250,  150)
         screen.blit(text_surface, text_rect)
-        pygame.display.update()  
-        # A cada loop, redesenha o fundo e os sprites
-        #screen.fill(BLACK)
+
+        pygame.display.update() 
         
-        """screen.blit(assets[BACKGROUND], background_rect)
-
-        screen.blit(background, background_rect)
-
-        text_surface = assets[SCORE_FONT_FINAL].render(f'{str(score)}M ', True, (255, 255, 0))
-        text_rect = text_surface.get_rect()
-        text_rect.midtop = (250,  150)
-        screen.blit(text_surface, text_rect)
-
         # Depois de desenhar tudo, inverte o display.
-        pygame.display.flip()"""
+        pygame.display.flip()
+        
+        
         
     return state
 
