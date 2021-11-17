@@ -1,6 +1,7 @@
 import pygame 
 import sys 
-  
+from os import path
+from config import FNT_DIR  
   
 pygame.init() 
 res = (720,720) 
@@ -10,7 +11,7 @@ color_light = (170,170,170)
 color_dark = (100,100,100) 
 width = screen.get_width() 
 height = screen.get_height() 
-smallfont = pygame.font.SysFont('Corbel',35) 
+smallfont = pygame.font.Font(path.join(FNT_DIR, 'NewAthleticM54.ttf'), 80)
 text = smallfont.render('quit' , True , color) 
   
 while True: 
