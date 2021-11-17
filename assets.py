@@ -38,7 +38,7 @@ def load_assets():
     assets[SCORE_FONT_FINAL] = pygame.font.Font(os.path.join(FNT_DIR, 'NewAthleticM54.ttf'), 100)
 
     # Carrega os sons do jogo
-    pygame.mixer.music.load('assets/snd/tgfcoder-FrozenJam-SeamlessLoop.ogg')
+    pygame.mixer.music.load('assets/snd/Speed.wav')
     pygame.mixer.music.set_volume(0.4)
     assets[BOOM_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'expl3.wav'))
     assets[DESTROY_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'expl6.wav'))
