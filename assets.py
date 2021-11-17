@@ -26,11 +26,11 @@ def load_assets():
     assets[ROCKET_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'foguete.png')).convert_alpha()
     assets[ROCKET_IMG] = pygame.transform.scale(assets['rocket_img'], (ROCKET_WIDTH, ROCKET_HEIGHT))
     assets[BULLET_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'star.png')).convert_alpha()
-    assets[BULLET_IMG] = pygame.transform.scale(assets['bullet_img'], (47, 47))
+    assets[BULLET_IMG] = pygame.transform.scale(assets['bullet_img'], (47, 47)).convert_alpha()
     explosion_anim = []
     for i in range(9):
         filename = os.path.join(IMG_DIR, f'exp{i}.png')
-        img = pygame.image.load(filename).convert()
+        img = pygame.image.load(filename).convert_alpha()
         img = pygame.transform.scale(img, (90, 90))
         explosion_anim.append(img)
     assets[EXPLOSION_ANIM] = explosion_anim
