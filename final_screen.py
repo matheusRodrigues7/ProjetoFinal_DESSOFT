@@ -8,6 +8,8 @@ from game_screen import game_screen
 
 
 def final_screen(screen,score):
+    with open('leaderboards.txt', 'a') as arquivo:
+        arquivo.write(f"{score}\n")
     # Variável para o ajuste de velocidade
     clock = pygame.time.Clock()
 
@@ -18,7 +20,7 @@ def final_screen(screen,score):
     running = True
     pygame.init() 
     res = (1024,768) 
-    screen = pygame.display.set_mode(res) 
+    screen = pygame.display.set_mode(res)
     color = (255,255,0) 
     color_light = (170,170,170) 
     color_dark = (100,100,100) 
@@ -67,6 +69,7 @@ def final_screen(screen,score):
         pygame.display.update()  
         # A cada loop, redesenha o fundo e os sprites
         #screen.fill(BLACK)
+        
         """screen.blit(assets[BACKGROUND], background_rect)
 
         screen.blit(background, background_rect)
