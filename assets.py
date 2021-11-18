@@ -16,6 +16,7 @@ BOOM_SOUND = 'boom_sound'
 DESTROY_SOUND = 'destroy_sound'
 PEW_SOUND = 'pew_sound'
 FIRE_SOUND = 'fire_sound'
+SCORE_FONT_LEADERBOARDS = 'score_font_leaderboards'
 
 def load_assets():
     assets = {}
@@ -37,6 +38,8 @@ def load_assets():
     assets[EXPLOSION_ANIM] = explosion_anim
     assets[SCORE_FONT] = pygame.font.Font(os.path.join(FNT_DIR, 'NewAthleticM54.ttf'), 40)
     assets[SCORE_FONT_FINAL] = pygame.font.Font(os.path.join(FNT_DIR, 'NewAthleticM54.ttf'), 100)
+    assets[SCORE_FONT_LEADERBOARDS] = pygame.font.Font(os.path.join(FNT_DIR, 'NewAthleticM54.ttf'), 35)
+
 
     # Carrega os sons do jogo
     pygame.mixer.music.load('assets/snd/Speed.wav')
