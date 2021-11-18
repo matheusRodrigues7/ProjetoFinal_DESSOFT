@@ -21,7 +21,7 @@ def game_screen(window):
     all_sprites.add(player)
     # ---- Criando os Rockets
     #Rockets = [Rocket1, Rocket2]
-    for _ in range(3):
+    for _ in range(5):
         #Rocket = Rocket(random.choice(Rockets))
         rocket = Rocket(assets)
         all_sprites.add(rocket)

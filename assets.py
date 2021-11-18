@@ -44,6 +44,6 @@ def load_assets():
     assets[BOOM_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'expl3.wav'))
     assets[DESTROY_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'expl6.wav'))
     assets[PEW_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'pew.wav'))
-    assets[FIRE_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'pew2.wav'))
+    assets[FIRE_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'jetpack.wav'))
     
     return assets

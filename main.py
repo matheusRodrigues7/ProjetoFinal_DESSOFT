@@ -10,7 +10,7 @@ from final_screen import final_screen
 pygame.init()
 pygame.mixer.init()
 
-# ----- Gera tela principal
+# ----- Gera tela principal 
 window = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Jetpack Joyride')
 score=0

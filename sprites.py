@@ -84,22 +84,21 @@ class Rocket(pygame.sprite.Sprite):
         self.image = assets[ROCKET_IMG]
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
-        self.rect.top = random.randint(110, 670)
+        self.rect.top = random.randint(130, 610)
         self.rect.bottom = random.randint(0, 0)
         self.rect.x = 1024
-        self.rect.y = random.randint(110, 715)
+        self.rect.y = random.randint(110, 650)
 
     def update(self):
-        # Atualizando a posição do meteoro
+        # Atualizando a posição do foguete
         self.rect.x -= 15
-        # Se o meteoro passar do final da tela, volta para cima e sorteia
+        # Se o foguete passar do final da tela, volta para cima e sorteia
         # novas posições e velocidades
         #if self.rect.right < 0:
            # self.kill()
-
         if self.rect.left > WIDTH or self.rect.right < 0:
-            self.rect.x = random.randint(1024, 1536)
-            self.rect.y = random.randint(110, 630)
+            self.rect.x = random.randint(1024, 2048)
+            self.rect.y = random.randint(130, 610)
     # ---- Setting Default Variable
     #Rocket_frequency = 4000 # --> Milesegundos 
     #last_Rocket = pygame.time.get_ticks()
