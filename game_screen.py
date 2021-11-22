@@ -95,6 +95,7 @@ def game_screen(window):
         window.blit(assets[GROUND], (ground_scroll, 0))
         if score >= 500:
             window.blit(assets[BACKGROUND], (ground_scroll, 0))
+        
         if dead == False:
             # ---- Cria novos Rockets
             #time_now = pygame.time.get_ticks()
