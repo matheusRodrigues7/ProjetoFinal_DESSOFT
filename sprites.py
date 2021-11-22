@@ -89,14 +89,17 @@ class Rocket(pygame.sprite.Sprite):
         self.rect.bottom = random.randint(0, 0)
         self.rect.x = 1024
         self.rect.y = random.randint(110, 650)
-        self.speedx = 5+20*(1-exp(-t))
+        
+        self.speedx = 10 + 15 * t if t < 1 else 35
     def update(self):
         # Atualizando a posição do foguete
+        self.t += 0.000000000001
+        self.speedx = 10 + 15 * self.t if self.t < 1 else 35
         self.rect.x -= self.speedx
         # Se o foguete passar do final da tela, volta para cima e sorteia
         # novas posições e velocidades
         #if self.rect.right < 0:
-           # self.kill()
+        # self.kill()
         if self.rect.left > WIDTH or self.rect.right < 0:
             self.rect.x = random.randint(1024, 2048)
             self.rect.y = random.randint(130, 610)

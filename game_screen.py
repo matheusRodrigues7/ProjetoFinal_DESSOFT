@@ -32,13 +32,13 @@ def game_screen(window):
     state = PLAYING
     score = 0
     ground_scroll = 0
-    t=0
+    t = 0
     # ===== Loop principal =====
     pygame.mixer.music.play(loops=-1)
     while state != DONE:
         clock.tick(FPS)
         score += 1
-        t += 1
+        t += 0.000000000001
         # ----- Trata eventos
         for event in pygame.event.get():
             # ----- Verifica consequências

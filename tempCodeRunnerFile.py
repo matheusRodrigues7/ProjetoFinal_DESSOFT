@@ -1,1 +1,0 @@
-    window.fill((0, 0, 0))  # Preenche com a cor branca
