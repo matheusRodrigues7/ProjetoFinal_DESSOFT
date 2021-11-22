@@ -1,5 +1,6 @@
 import random
 import pygame
+from math import *
 from config import WIDTH #, HEIGHT, ROCKET_WIDTH, ROCKET_HEIGHT
 from assets import PLAYER_IMG, FLY_IMG, JUMP_IMG, PEW_SOUND, ROCKET_IMG, BULLET_IMG, EXPLOSION_ANIM, FIRE_SOUND
 
@@ -77,10 +78,10 @@ class Player(pygame.sprite.Sprite):
         self.assets[PEW_SOUND].play()
 
 class Rocket(pygame.sprite.Sprite):
-    def __init__(self,assets):
+    def __init__(self,assets,t=0):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
-
+        self.t = t
         self.image = assets[ROCKET_IMG]
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
@@ -88,10 +89,10 @@ class Rocket(pygame.sprite.Sprite):
         self.rect.bottom = random.randint(0, 0)
         self.rect.x = 1024
         self.rect.y = random.randint(110, 650)
-
+        self.speedx = 5+20*(1-exp(-t))
     def update(self):
         # Atualizando a posição do foguete
-        self.rect.x -= 15
+        self.rect.x -= self.speedx
         # Se o foguete passar do final da tela, volta para cima e sorteia
         # novas posições e velocidades
         #if self.rect.right < 0:

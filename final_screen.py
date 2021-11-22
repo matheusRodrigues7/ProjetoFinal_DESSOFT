@@ -109,7 +109,7 @@ def final_screen(screen,score):
         pygame.display.flip()
         
         
-        
+
     return state
 
     # text_surface = load_assets()[SCORE_FONT].render("{:08d}".format(int(game_screen.score)), True, (255, 255, 0))

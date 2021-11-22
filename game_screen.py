@@ -32,11 +32,13 @@ def game_screen(window):
     state = PLAYING
     score = 0
     ground_scroll = 0
+    t=0
     # ===== Loop principal =====
     pygame.mixer.music.play(loops=-1)
     while state != DONE:
         clock.tick(FPS)
-        score += 1        
+        score += 1
+        t += 1
         # ----- Trata eventos
         for event in pygame.event.get():
             # ----- Verifica consequências
@@ -69,7 +71,7 @@ def game_screen(window):
             for rocket in hits: # As chaves são os elementos do primeiro grupo (rockets) que colidiram com alguma bala
                 # O meteoro e destruido e precisa ser recriado
                 assets[DESTROY_SOUND].play()
-                r = Rocket(assets)
+                r = Rocket(assets,t)
                 all_sprites.add(r)
                 all_rockets.add(r)
                 explosao = Explosion(rocket.rect.center, assets)
@@ -111,5 +113,4 @@ def game_screen(window):
         window.blit(text_surface, text_rect)
         # ---- Mostra o novo frame para o jogador
         pygame.display.update()
-    
     return state, score
