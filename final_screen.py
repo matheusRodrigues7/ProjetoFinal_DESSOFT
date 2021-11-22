@@ -2,7 +2,7 @@ import pygame
 import sys
 import random
 from os import path
-from assets import BACKGROUND, load_assets, SCORE_FONT_FINAL, SCORE_FONT_LEADERBOARDS
+from assets import BACKGROUND, load_assets, SCORE_FONT_FINAL, SCORE_FONT_LEADERBOARDS, GROUND
 from config import IMG_DIR, BLACK, FPS, GAME, QUIT, WIDTH, HEIGHT, FNT_DIR, WHITE
 from game_screen import game_screen
 
@@ -67,7 +67,10 @@ def final_screen(screen,score):
         # A cada loop, redesenha o fundo e os sprites
         screen.fill(BLACK)
         
-        screen.blit(assets[BACKGROUND], background_rect)
+        screen.blit(assets[GROUND], background_rect)
+        
+        if score >= 500:
+            screen.blit(assets[BACKGROUND], background_rect)
 
         screen.blit(background, background_rect)
 

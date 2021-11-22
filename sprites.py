@@ -93,7 +93,7 @@ class Rocket(pygame.sprite.Sprite):
         self.speedx = 10 + 15 * t if t < 1 else 35
     def update(self):
         # Atualizando a posição do foguete
-        self.t += 0.000000000001
+        self.t += 0.000001
         self.speedx = 10 + 15 * self.t if self.t < 1 else 35
         self.rect.x -= self.speedx
         # Se o foguete passar do final da tela, volta para cima e sorteia

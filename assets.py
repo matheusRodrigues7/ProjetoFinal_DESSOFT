@@ -2,7 +2,7 @@ import pygame
 import os
 from config import ROCKET_WIDTH, ROCKET_HEIGHT, SANDMANN_WIDTH, SANDMANN_HEIGHT, IMG_DIR, SND_DIR, FNT_DIR
 
-BACKGROUND = 'background'
+BACKGROUND = 'background2'
 GROUND = 'ground'
 PLAYER_IMG = 'player_img'
 FLY_IMG = 'fly_img'
@@ -20,7 +20,7 @@ SCORE_FONT_LEADERBOARDS = 'score_font_leaderboards'
 
 def load_assets():
     assets = {}
-    assets[BACKGROUND] = pygame.image.load(os.path.join(IMG_DIR, 'background.jpg')).convert()
+    assets[BACKGROUND] = pygame.image.load(os.path.join(IMG_DIR, 'background2.png')).convert()
     assets[GROUND] = pygame.image.load(os.path.join(IMG_DIR, 'background_ground.png')).convert_alpha()
     assets[PLAYER_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'walk1.png')).convert_alpha()
     assets[FLY_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'flying1.png')).convert_alpha()

@@ -38,7 +38,7 @@ def game_screen(window):
     while state != DONE:
         clock.tick(FPS)
         score += 1
-        t += 0.000000000001
+        t += 0.000001
         # ----- Trata eventos
         for event in pygame.event.get():
             # ----- Verifica consequências
@@ -92,8 +92,9 @@ def game_screen(window):
         dead = False
         # ---- Gera saídas
         # ---- Faz o background se mover
-        window.blit(assets[BACKGROUND], (0, 0))
         window.blit(assets[GROUND], (ground_scroll, 0))
+        if score >= 500:
+            window.blit(assets[BACKGROUND], (ground_scroll, 0))
         if dead == False:
             # ---- Cria novos Rockets
             #time_now = pygame.time.get_ticks()
