@@ -71,7 +71,7 @@ class Player(pygame.sprite.Sprite):
         self.assets[FIRE_SOUND].play()
     
     def shoot(self):
-        # A nova bala vai ser criada logo acima e no centro horizontal da nave
+        # ---- O 1berto vai ser criado na direita e no meio do player 
         new_bullet = Bullet(self.assets, self.rect.right, self.rect.centery)
         self.groups['all_sprites'].add(new_bullet)
         self.groups['all_bullets'].add(new_bullet)
@@ -91,15 +91,13 @@ class Rocket(pygame.sprite.Sprite):
         self.rect.y = random.randint(110, 650)
         
         self.speedx = 10 + 15 * t if t < 1 else 35
+
     def update(self):
         # Atualizando a posição do foguete
-        self.t += 0.000001
+        self.t += 0.0001
         self.speedx = 10 + 15 * self.t if self.t < 1 else 35
         self.rect.x -= self.speedx
-        # Se o foguete passar do final da tela, volta para cima e sorteia
-        # novas posições e velocidades
-        #if self.rect.right < 0:
-        # self.kill()
+        
         if self.rect.left > WIDTH or self.rect.right < 0:
             self.rect.x = random.randint(1024, 2048)
             self.rect.y = random.randint(130, 610)

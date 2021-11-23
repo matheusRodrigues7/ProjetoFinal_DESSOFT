@@ -12,11 +12,11 @@ BULLET_IMG = 'bullet_img'
 EXPLOSION_ANIM = 'explosion_anim'
 SCORE_FONT = 'score_font'
 SCORE_FONT_FINAL = 'score_font_final'
-BOOM_SOUND = 'boom_sound'
 DESTROY_SOUND = 'destroy_sound'
 PEW_SOUND = 'pew_sound'
 FIRE_SOUND = 'fire_sound'
 SCORE_FONT_LEADERBOARDS = 'score_font_leaderboards'
+GAME_OVER = 'game_over'
 
 def load_assets():
     assets = {}
@@ -40,13 +40,12 @@ def load_assets():
     assets[SCORE_FONT_FINAL] = pygame.font.Font(os.path.join(FNT_DIR, 'NewAthleticM54.ttf'), 100)
     assets[SCORE_FONT_LEADERBOARDS] = pygame.font.Font(os.path.join(FNT_DIR, 'NewAthleticM54.ttf'), 35)
 
-
     # Carrega os sons do jogo
     pygame.mixer.music.load('assets/snd/Speed.wav')
     pygame.mixer.music.set_volume(0.1)
-    assets[BOOM_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'expl3.wav'))
     assets[DESTROY_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'expl6.wav'))
     assets[PEW_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'pew.wav'))
     assets[FIRE_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'jetpack.wav'))
-    
+    assets[GAME_OVER] = pygame.mixer.Sound(os.path.join(SND_DIR, 'game_over.wav'))
+
     return assets

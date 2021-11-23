@@ -1,7 +1,7 @@
 import pygame
 import random
 from os import path
-
+from assets import load_assets
 from config import IMG_DIR, BLACK, FPS, GAME, QUIT
 
 
@@ -14,6 +14,8 @@ def init_screen(screen):
     background_rect = background.get_rect()
 
     running = True
+    assets = load_assets()
+    pygame.mixer.music.play(loops=-1)
     while running:
 
         # Ajusta a velocidade do jogo.

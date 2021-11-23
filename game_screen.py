@@ -1,7 +1,7 @@
 import pygame
 from config import FPS, SCROLL_SPEED, FINAL
-from assets import load_assets, DESTROY_SOUND, BOOM_SOUND, BACKGROUND, GROUND, SCORE_FONT
-from sprites import Player, Rocket, Bullet, Explosion
+from assets import load_assets, DESTROY_SOUND, BACKGROUND, GROUND, SCORE_FONT, GAME_OVER
+from sprites import Player, Rocket, Explosion
 from time import sleep
 
 def game_screen(window):
@@ -20,7 +20,6 @@ def game_screen(window):
     player = Player(groups,assets)
     all_sprites.add(player)
     # ---- Criando os Rockets
-    #Rockets = [Rocket1, Rocket2]
     for _ in range(5):
         #Rocket = Rocket(random.choice(Rockets))
         rocket = Rocket(assets)
@@ -37,8 +36,8 @@ def game_screen(window):
     pygame.mixer.music.play(loops=-1)
     while state != DONE:
         clock.tick(FPS)
-        score += 1
-        t += 0.000001
+        score += 0.5
+        t += 0.0001
         # ----- Trata eventos
         for event in pygame.event.get():
             # ----- Verifica consequências
@@ -48,7 +47,7 @@ def game_screen(window):
             if state == PLAYING:
                 # Verifica se apertou alguma tecla.
                 if event.type == pygame.KEYDOWN:
-                    # Dependendo da tecla, altera a velocidade.
+                    # Se apertar a tecla UP, voa
                     if event.key == pygame.K_UP:
                         player.speedy -= 20
                         player.fogo()
@@ -56,12 +55,9 @@ def game_screen(window):
                         player.shoot()
                 # Verifica se soltou alguma tecla.
                 if event.type == pygame.KEYUP:
-                    # Dependendo da tecla, altera a velocidade.
                     if event.key == pygame.K_UP:
                         player.speedy += 20
-        # Finalizar jogo se colidir player com Rockets - !!!IMPLEMENTAR!!!
-        #if len(hits) == True:
-            #dead = True
+        
         # ---- Atualiza estado do jogo 
         # Atualizando a posição dos sprites
         all_sprites.update()
@@ -69,7 +65,7 @@ def game_screen(window):
             # Verifica se houve colisão entre tiro e foguete
             hits = pygame.sprite.groupcollide(all_rockets, all_bullets, True, True, pygame.sprite.collide_mask)
             for rocket in hits: # As chaves são os elementos do primeiro grupo (rockets) que colidiram com alguma bala
-                # O meteoro e destruido e precisa ser recriado
+                # O foguete e destruido e precisa ser recriado
                 assets[DESTROY_SOUND].play()
                 r = Rocket(assets,t)
                 all_sprites.add(r)
@@ -79,33 +75,29 @@ def game_screen(window):
                 '''score += 100'''
                 
             # ---- Verifica se houve colisão entre player e foguete
+            # Finalizar jogo se colidir player com Rockets
             hits = pygame.sprite.spritecollide(player, all_rockets, True, pygame.sprite.collide_mask)
             if len(hits) > 0:
-                dead = True
-                assets[BOOM_SOUND].play()
+                assets[GAME_OVER].play()
                 sleep(1) # Precisa esperar senão fecha
                 state = EXPLODING
         elif state == EXPLODING:
             state = FINAL
             break
-        # ---- Setting Default Variable
-        dead = False
+
+        '''dead = False'''
         # ---- Gera saídas
         # ---- Faz o background se mover
         window.blit(assets[GROUND], (ground_scroll, 0))
+        # Troca de tela 
         if score >= 500:
             window.blit(assets[BACKGROUND], (ground_scroll, 0))
         
-        if dead == False:
-            # ---- Cria novos Rockets
-            #time_now = pygame.time.get_ticks()
-            #if time_now - last_Rocket > Rocket_frequency:
-                    #Rocket = Rocket(random.choice(Rockets))
-                    #all_sprites.add(Rocket)
-            # ---- Faz o background se mover
-            ground_scroll -= SCROLL_SPEED
-            if abs(ground_scroll) > 1024:
-                ground_scroll = 0
+        '''if dead == False:'''
+        ground_scroll -= SCROLL_SPEED
+        if abs(ground_scroll) > 1024:
+            ground_scroll = 0
+
         # ---- Desenhando os sprites
         all_sprites.draw(window)
         # desenhando o placar
@@ -115,4 +107,5 @@ def game_screen(window):
         window.blit(text_surface, text_rect)
         # ---- Mostra o novo frame para o jogador
         pygame.display.update()
+
     return state, score
