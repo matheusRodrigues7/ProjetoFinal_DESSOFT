@@ -2,8 +2,8 @@ import pygame
 import sys
 import random
 from os import path
-from assets import BACKGROUND, load_assets, SCORE_FONT_FINAL, SCORE_FONT_LEADERBOARDS, GROUND
-from config import IMG_DIR, BLACK, FPS, GAME, FNT_DIR, WHITE, YELLOW, GRAY
+from assets import load_assets, BACKGROUND, BACKGROUND2, SCORE_FONT_FINAL, SCORE_FONT_LEADERBOARDS, BUTTON_FONT
+from config import IMG_DIR, BLACK, FPS, GAME, WHITE, YELLOW, GRAY
 from game_screen import game_screen
 
 # Lista de 3 maiores scores
@@ -35,15 +35,10 @@ def final_screen(screen,score):
     # Carrega o fundo da tela inicial
     background = pygame.image.load(path.join(IMG_DIR, 'morte.png')).convert_alpha()
     background_rect = background.get_rect()
-
-    pygame.init() 
-    res = (1024,768) 
-    screen = pygame.display.set_mode(res)
-    #width = screen.get_width() 
-    #height = screen.get_height() 
-    smallfont = pygame.font.Font(path.join(FNT_DIR, 'NewAthleticM54.ttf'), 80)
-    sair = smallfont.render('QUIT', True, BLACK)
-    play_again = smallfont.render('PLAY AGAIN', True , BLACK)
+    
+    # Implementa os botões
+    sair = assets[BUTTON_FONT].render('QUIT', True, BLACK)
+    play_again = assets[BUTTON_FONT].render('PLAY AGAIN', True , BLACK)
     
     running = True
     pygame.mixer.music.play(loops=-1)
@@ -68,10 +63,10 @@ def final_screen(screen,score):
         # A cada loop, redesenha o fundo e os sprites
         screen.fill(BLACK)
         
-        screen.blit(assets[GROUND], background_rect)
+        screen.blit(assets[BACKGROUND], background_rect)
         
         if score >= 500:
-            screen.blit(assets[BACKGROUND], background_rect)
+            screen.blit(assets[BACKGROUND2], background_rect)
 
         screen.blit(background, background_rect)
 
@@ -108,5 +103,3 @@ def final_screen(screen,score):
         pygame.display.flip()
         
     return state
-
-    # text_surface = load_assets()[SCORE_FONT].render("{:08d}".format(int(game_screen.score)), True, (255, 255, 0))

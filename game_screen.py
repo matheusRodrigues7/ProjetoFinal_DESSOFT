@@ -1,6 +1,6 @@
 import pygame
 from config import FPS, SCROLL_SPEED, FINAL
-from assets import load_assets, DESTROY_SOUND, BACKGROUND, GROUND, SCORE_FONT, GAME_OVER
+from assets import load_assets, DESTROY_SOUND, BACKGROUND2, BACKGROUND, SCORE_FONT, GAME_OVER
 from sprites import Player, Rocket, Explosion
 from time import sleep
 
@@ -36,7 +36,7 @@ def game_screen(window):
     pygame.mixer.music.play(loops=-1)
     while state != DONE:
         clock.tick(FPS)
-        score += 0.5
+        score += 0.25
         t += 0.0001
         # ----- Trata eventos
         for event in pygame.event.get():
@@ -88,10 +88,10 @@ def game_screen(window):
         '''dead = False'''
         # ---- Gera saídas
         # ---- Faz o background se mover
-        window.blit(assets[GROUND], (ground_scroll, 0))
+        window.blit(assets[BACKGROUND], (ground_scroll, 0))
         # Troca de tela 
         if score >= 500:
-            window.blit(assets[BACKGROUND], (ground_scroll, 0))
+            window.blit(assets[BACKGROUND2], (ground_scroll, 0))
         
         '''if dead == False:'''
         ground_scroll -= SCROLL_SPEED
