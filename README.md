@@ -17,7 +17,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 
 - [x] Iniciar o jogo
 - [x] Implementar Fisica
-- [ ] Terminar Tela de morte
+- [x] Terminar Tela de morte
 - [ ] Melhorar efeitos sonoros e visuais
 - [ ] Terminar acabamento final
 
