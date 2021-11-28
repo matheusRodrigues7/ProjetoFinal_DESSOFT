@@ -65,7 +65,7 @@ def final_screen(screen,score):
         
         screen.blit(assets[BACKGROUND], background_rect)
         
-        if score >= 500:
+        if score >= 2000:
             screen.blit(assets[BACKGROUND2], background_rect)
 
         screen.blit(background, background_rect)

@@ -90,7 +90,7 @@ def game_screen(window):
         # ---- Faz o background se mover
         window.blit(assets[BACKGROUND], (ground_scroll, 0))
         # Troca de tela 
-        if score >= 500:
+        if score >= 2000:
             window.blit(assets[BACKGROUND2], (ground_scroll, 0))
         
         '''if dead == False:'''
