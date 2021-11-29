@@ -6,19 +6,17 @@
 <img src="https://thumbs.gfycat.com/PrestigiousRawAnnashummingbird-max-1mb.gif" width="500" alt="Jetpack Joyride Gif">
 
 > Jogo desenvolvido com Pygame para a disciplina de Design de Software do 1° Semestre de Engenharia do Insper
-O arquivo a ser executado deve ser o main.py
+
 #### Desenvolvido usando:  
 <img align= "left" src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white"/>
 <img align= "left" src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>.  
 
-### Ajustes e melhorias: (ROADMAP)
-O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
+## 🎮 O game
+O objetivo do jogo Jetpack Joyride é chegar o mais longe possível. Para isso, você deve explodir ou desviar dos obstáculos, que são os foguetes, os quais ficam cada vez mais rápidos, em função do tempo de jogo. 
 
-- [x] Iniciar o jogo
-- [x] Implementar Fisica
-- [x] Terminar Tela de morte
-- [x] Melhorar efeitos sonoros e visuais
-- [x] Terminar acabamento final
+Para explodir o foguete, você precisa atirar o 1berto e, para isso, deve apertar "espaço". Para ativar o jetpack, ou seja, voar, você precisar apertar a tecla "up".
+
+Então, rode o arquivo main.py e divirta-se!!!
 
 ## 🤝 Colaboradores
 
