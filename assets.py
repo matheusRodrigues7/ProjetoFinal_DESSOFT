@@ -45,9 +45,9 @@ def load_assets():
     # Carrega os sons do jogo
     pygame.mixer.music.load('assets/snd/Speed.wav')
     pygame.mixer.music.set_volume(0.1)
-    assets[DESTROY_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'expl6.wav'))
+    assets[DESTROY_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'Explode.wav'))
     assets[PEW_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'pew.wav'))
-    assets[FIRE_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'jetpack.wav'))
+    assets[FIRE_SOUND] = pygame.mixer.Sound(os.path.join(SND_DIR, 'jetpack.mp3'))
     assets[GAME_OVER] = pygame.mixer.Sound(os.path.join(SND_DIR, 'game_over.wav'))
 
     return assets
