@@ -1,7 +1,7 @@
 import random
 import pygame
 from math import *
-from config import WIDTH #, HEIGHT, ROCKET_WIDTH, ROCKET_HEIGHT
+from config import WIDTH
 from assets import PLAYER_IMG, FLY_IMG, JUMP_IMG, PEW_SOUND, ROCKET_IMG, BULLET_IMG, EXPLOSION_ANIM, FIRE_SOUND
 
 # ---- Inicia estruturas de dados

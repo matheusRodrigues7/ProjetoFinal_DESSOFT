@@ -65,11 +65,13 @@ def final_screen(screen,score):
         
         screen.blit(assets[BACKGROUND], background_rect)
         
+        # Se score passar de mil, muda a tela
         if score >= 1000:
             screen.blit(assets[BACKGROUND2], background_rect)
 
         screen.blit(background, background_rect)
 
+        # Criando os botões
         if 524 <= mouse[0] <= 524+365 and 320 <= mouse[1] <= 320+155: 
             pygame.draw.rect(screen,WHITE,[524,320,450,158]) 
           
@@ -82,19 +84,21 @@ def final_screen(screen,score):
         else: 
             pygame.draw.rect(screen,GRAY,[524,528,450,158])
         
+        # Mostrando score final
         screen.blit(sair, (675.5,350.5))
         screen.blit(play_again , (570.5,560.5))
-        text_surface = assets[SCORE_FONT_FINAL].render(f'{str(int(score))}M ', True, YELLOW)
-        text_rect = text_surface.get_rect()
-        text_rect.midtop = (250,  150)
-        screen.blit(text_surface, text_rect)
+        score_final = assets[SCORE_FONT_FINAL].render(f'{str(int(score))}M ', True, YELLOW)
+        score_final_rect = score_final.get_rect()
+        score_final_rect.midtop = (250,  150)
+        screen.blit(score_final, score_final_rect)
 
+        # Mostrando leaderboards
         n = 125
         for score1 in scores:
-            text_surface = assets[SCORE_FONT_LEADERBOARDS].render(f'{str(int(score1))}M ', True, YELLOW)
-            text_rect = text_surface.get_rect()
-            text_rect.midtop = (800,  n)
-            screen.blit(text_surface, text_rect)
+            records = assets[SCORE_FONT_LEADERBOARDS].render(f'{str(int(score1))}M ', True, YELLOW)
+            records_rect = records.get_rect()
+            records_rect.midtop = (800,  n)
+            screen.blit(records, records_rect)
             n += 50
 
         pygame.display.update() 

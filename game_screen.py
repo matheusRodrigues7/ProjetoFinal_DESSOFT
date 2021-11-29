@@ -16,7 +16,8 @@ def game_screen(window):
     groups['all_sprites'] = all_sprites
     groups['all_rockets'] = all_rockets
     groups['all_bullets'] = all_bullets
-# ---- Criando o jogador
+    
+    # ---- Criando o jogador
     player = Player(groups,assets)
     all_sprites.add(player)
     # ---- Criando os Rockets
@@ -72,7 +73,6 @@ def game_screen(window):
                 all_rockets.add(r)
                 explosao = Explosion(rocket.rect.center, assets)
                 all_sprites.add(explosao)
-                '''score += 100'''
                 
             # ---- Verifica se houve colisão entre player e foguete
             # Finalizar jogo se colidir player com Rockets
@@ -85,7 +85,6 @@ def game_screen(window):
             state = FINAL
             break
 
-        '''dead = False'''
         # ---- Gera saídas
         # ---- Faz o background se mover
         window.blit(assets[BACKGROUND], (ground_scroll, 0))
@@ -93,7 +92,6 @@ def game_screen(window):
         if score >= 1000:
             window.blit(assets[BACKGROUND2], (ground_scroll, 0))
         
-        '''if dead == False:'''
         ground_scroll -= SCROLL_SPEED
         if abs(ground_scroll) > 1024:
             ground_scroll = 0
