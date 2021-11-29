@@ -6,20 +6,19 @@
 <img src="https://thumbs.gfycat.com/PrestigiousRawAnnashummingbird-max-1mb.gif" width="500" alt="Jetpack Joyride Gif">
 
 > Jogo desenvolvido com Pygame para a disciplina de Design de Software do 1° Semestre de Engenharia do Insper
-
+O arquivo a ser executado deve ser o main.py
 #### Desenvolvido usando:  
 <img align= "left" src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white"/>
 <img align= "left" src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>.  
 
 ### Ajustes e melhorias: (ROADMAP)
-
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
 - [x] Iniciar o jogo
 - [x] Implementar Fisica
 - [x] Terminar Tela de morte
-- [ ] Melhorar efeitos sonoros e visuais
-- [ ] Terminar acabamento final
+- [x] Melhorar efeitos sonoros e visuais
+- [x] Terminar acabamento final
 
 ## 🤝 Colaboradores
 
