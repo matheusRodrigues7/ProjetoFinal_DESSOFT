@@ -11,7 +11,7 @@
 <img align= "left" src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white"/>
 <img align= "left" src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>.  
 
-## 🎮 O game
+## 🎮 O Game
 O objetivo do jogo Jetpack Joyride é chegar o mais longe possível. Para isso, você deve explodir ou desviar dos obstáculos, que são os foguetes, os quais ficam cada vez mais rápidos, em função do tempo de jogo. 
 
 Para explodir o foguete, você precisa atirar o 1berto e, para isso, deve apertar "espaço". Para ativar o jetpack, ou seja, voar, você precisar apertar a tecla "up".
