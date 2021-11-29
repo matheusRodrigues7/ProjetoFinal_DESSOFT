@@ -1,8 +1,8 @@
 import pygame
 import random
 from os import path
-from assets import load_assets
-from config import IMG_DIR, BLACK, FPS, GAME, QUIT
+from assets import load_assets , SCORE_FONT_LEADERBOARDS
+from config import IMG_DIR, BLACK, FPS, GAME, QUIT, WHITE
 
 
 def init_screen(screen):
@@ -37,6 +37,17 @@ def init_screen(screen):
         screen.blit(background, background_rect)
 
         # Depois de desenhar tudo, inverte o display.
-        pygame.display.flip()
+        # Instruções
+        inst1 = assets[SCORE_FONT_LEADERBOARDS].render('press up to fly', True, WHITE)
+        inst1_rect = inst1.get_rect()
+        inst1_rect.midtop = (500,  590)
+        screen.blit(inst1, inst1_rect)
 
+        inst2 = assets[SCORE_FONT_LEADERBOARDS].render('press space to shoot', True, WHITE)
+        inst2_rect = inst1.get_rect()
+        inst2_rect.midtop = (450,  640)
+        screen.blit(inst2, inst2_rect)
+        
+        pygame.display.flip()
+    
     return state
