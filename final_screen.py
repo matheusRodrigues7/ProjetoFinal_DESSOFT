@@ -65,16 +65,16 @@ def final_screen(screen,score):
         
         screen.blit(assets[BACKGROUND], background_rect)
         
-        if score >= 2000:
+        if score >= 1000:
             screen.blit(assets[BACKGROUND2], background_rect)
 
         screen.blit(background, background_rect)
 
         if 524 <= mouse[0] <= 524+365 and 320 <= mouse[1] <= 320+155: 
-            pygame.draw.rect(screen,WHITE,[524,320,365,155]) 
+            pygame.draw.rect(screen,WHITE,[524,320,450,158]) 
           
         else: 
-            pygame.draw.rect(screen,GRAY,[524,320,365,155])
+            pygame.draw.rect(screen,GRAY,[524,320,450,158])
         
         if 524 <= mouse[0] <= 524+365 and 495 <= mouse[1] <= 495+155: 
             pygame.draw.rect(screen,WHITE,[524,528,450,158]) 
@@ -82,7 +82,7 @@ def final_screen(screen,score):
         else: 
             pygame.draw.rect(screen,GRAY,[524,528,450,158])
         
-        screen.blit(sair, (640.5,350.5))
+        screen.blit(sair, (675.5,350.5))
         screen.blit(play_again , (570.5,560.5))
         text_surface = assets[SCORE_FONT_FINAL].render(f'{str(int(score))}M ', True, YELLOW)
         text_rect = text_surface.get_rect()
