@@ -62,4 +62,3 @@ Agradecemos aos seguintes membros que contribuíram para este projeto:
   </a>
 </table>
 
-[⬆ Voltar ao topo](#nome-do-projeto)<br>
