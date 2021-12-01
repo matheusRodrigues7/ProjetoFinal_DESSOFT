@@ -16,7 +16,7 @@ O objetivo do jogo Jetpack Joyride é chegar o mais longe possível. Para isso, 
 
 Para explodir o foguete, você precisa atirar o 1berto e, para isso, deve apertar "espaço". Para ativar o jetpack, ou seja, voar, você precisa apertar a tecla "up".
 
-Então, rode o arquivo main.py e divirta-se!!!
+Então, rode o arquivo main.py <a href="https://github.com/matheusRodrigues7/ProjetoFinal_DESSOFT/blob/main/main.py"><b>main.py</b></a> e divirta-se!!!
 
 ## 🤝 Colaboradores
 
