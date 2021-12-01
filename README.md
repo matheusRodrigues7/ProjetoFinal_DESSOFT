@@ -56,6 +56,7 @@ Agradecemos aos seguintes membros que contribuíram para este projeto:
   <a href ="https://github.com/arifiorino/Jetpack_Joyride.git">
     <b>FIORINO, Ari: Jetpack Joyride</b>
   </a>
+  
   <a href ="https://dessoft.insper-comp.com.br/conteudo/pygame">
     <b>Academia Python - Pygame</b>
   </a>
