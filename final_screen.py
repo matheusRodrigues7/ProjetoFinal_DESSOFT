@@ -84,9 +84,11 @@ def final_screen(screen,score):
         else: 
             pygame.draw.rect(screen,GRAY,[524,528,450,158])
         
-        # Mostrando score final
+        # Botões
         screen.blit(sair, (675.5,350.5))
         screen.blit(play_again , (570.5,560.5))
+        
+        # Mostrando score final
         score_final = assets[SCORE_FONT_FINAL].render(f'{str(int(score))}M ', True, YELLOW)
         score_final_rect = score_final.get_rect()
         score_final_rect.midtop = (250,  150)

@@ -32,32 +32,31 @@ class Player(pygame.sprite.Sprite):
 
 
     def update(self):
-        dead = False
-        if dead == False: # ---> IMPLEMENTAR FUNÇÃO DE MORTE
-            # ---- Atualização da posição do player
-            # ---- Aceleração Gravidade
-            self.accel += 0.5
-            self.accel = min(self.accel, 10)
-            
-            # ---- Velocidade Jetpack
-            self.rect.y += self.speedy
+        
+        # ---- Atualização da posição do player
+        # ---- Aceleração Gravidade
+        self.accel += 0.5
+        self.accel = min(self.accel, 10)
+        
+        # ---- Velocidade Jetpack
+        self.rect.y += self.speedy
 
-                    # ---- Troca o Estilo de Voo
-            if self.accel <= 10:
-                self.image = self.jump
-            if self.speedy == -20:
-                self.image = self.fly 
+                # ---- Troca o Estilo de Voo
+        if self.accel <= 10:
+            self.image = self.jump
+        if self.speedy == -20:
+            self.image = self.fly 
 
-            # ---- Jogador anda dentro dessas cordenadas
-            if self.rect.centery > 620 and self.rect.centery <= 650:
-                self.counter+= 1
-                walk_cooldown = 5
-                if self.counter > walk_cooldown:
-                    self.counter = 0
-                    self.index +=1
-                    if self.index >= len(self.images):
-                        self.index = 0
-                self.image = self.images[self.index]
+        # ---- Jogador anda dentro dessas cordenadas
+        if self.rect.centery > 620 and self.rect.centery <= 650:
+            self.counter+= 1
+            walk_cooldown = 5
+            if self.counter > walk_cooldown:
+                self.counter = 0
+                self.index +=1
+                if self.index >= len(self.images):
+                    self.index = 0
+            self.image = self.images[self.index]
 
         # ---- Limita o Teto   
         if self.rect.top<=110:
@@ -101,10 +100,7 @@ class Rocket(pygame.sprite.Sprite):
         if self.rect.left > WIDTH or self.rect.right < 0:
             self.rect.x = random.randint(1024, 2048)
             self.rect.y = random.randint(130, 610)
-    # ---- Setting Default Variable
-    #Rocket_frequency = 4000 # --> Milesegundos 
-    #last_Rocket = pygame.time.get_ticks()
-            
+
 # Classe Bullet que representa os tiros
 class Bullet(pygame.sprite.Sprite):
     # Construtor da classe.
@@ -128,7 +124,7 @@ class Bullet(pygame.sprite.Sprite):
         if self.rect.left > WIDTH:
             self.kill()
 
-# Classe que representa uma explosão de meteoro
+# Classe que representa uma explosão do foguete
 class Explosion(pygame.sprite.Sprite):
     # Construtor da classe.
     def __init__(self, center, assets):
