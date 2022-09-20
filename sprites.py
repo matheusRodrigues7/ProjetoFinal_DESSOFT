@@ -29,7 +29,9 @@ class Player(pygame.sprite.Sprite):
             img2 = pygame.image.load(f'assets/img/walk{num}.png')
             self.images.append(img2)
         self.accel = 0
-
+    def movement(self):
+            self.speedy -= 20
+            self.fogo()
 
     def update(self):
         
@@ -90,7 +92,7 @@ class Rocket(pygame.sprite.Sprite):
         self.rect.y = random.randint(110, 650)
         
         self.speedx = 10 + 15 * t if t < 1 else 35
-
+    #super().__init__(self, )
     def update(self):
         # Atualizando a posição do foguete
         self.t += 0.0001
