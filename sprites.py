@@ -30,7 +30,9 @@ class Player(pygame.sprite.Sprite):
             self.images.append(img2)
         self.accel = 0
 
-
+    def movement(self):
+        self.speedy -= 20
+        self.fogo()
     def update(self):
         
         # ---- Atualização da posição do player
