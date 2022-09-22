@@ -50,7 +50,8 @@ def game_screen(window):
                 if event.type == pygame.KEYDOWN:
                     # Se apertar a tecla UP, voa
                     if event.key == pygame.K_UP:
-                        player.movement()
+                        player.speedy -= 20
+                        player.fogo()
                     if event.key == pygame.K_SPACE:
                         player.shoot()
                 # Verifica se soltou alguma tecla.
