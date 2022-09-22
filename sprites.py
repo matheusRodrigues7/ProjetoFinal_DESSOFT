@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 import random
 import pygame
 from math import *
@@ -6,21 +7,25 @@ from assets import PLAYER_IMG, FLY_IMG, JUMP_IMG, PEW_SOUND, ROCKET_IMG, BULLET_
 
 # ---- Inicia estruturas de dados
 # ---- Definindo as classes
-class Player(pygame.sprite.Sprite):
-    def __init__(self,groups,assets):
-        # Construtor da classe mãe (Sprite).
+class Assets(pygame.sprite.Sprite):    #Super Classe Para Assets
+    def __init__(self, image, fly, jump):
         pygame.sprite.Sprite.__init__(self)
-        self.image = assets[PLAYER_IMG]
+        self.image = image
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
+        self.jump = jump
+        self.fly = fly
+
+class Player(Assets):
+    def __init__(self,groups,assets):
+        # Construtor da classe mãe (Sprite).
+        super().__init__(assets[PLAYER_IMG], assets[FLY_IMG], assets[JUMP_IMG])
         self.rect.centery = 625
         self.rect.left = 80
         self.speedy = 0
         self.images = []
         self.index = 0
         self.counter = 0
-        self.fly = assets[FLY_IMG]
-        self.jump = assets[JUMP_IMG]
         self.groups = groups
         self.assets = assets
         #self.pew_sound = pew_sound
@@ -30,7 +35,10 @@ class Player(pygame.sprite.Sprite):
             self.images.append(img2)
         self.accel = 0
 
-
+    def movement(self):
+        self.speedy -= 20
+        self.fogo()
+        
     def update(self):
         
         # ---- Atualização da posição do player
@@ -76,14 +84,12 @@ class Player(pygame.sprite.Sprite):
         self.groups['all_bullets'].add(new_bullet)
         self.assets[PEW_SOUND].play()
 
-class Rocket(pygame.sprite.Sprite):
+class Rocket(Assets):
     def __init__(self,assets,t=0):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
         self.t = t
-        self.image = assets[ROCKET_IMG]
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
+        super().__init__(assets[ROCKET_IMG], NULL, NULL)
         self.rect.top = random.randint(130, 610)
         self.rect.bottom = random.randint(0, 0)
         self.rect.x = 1024
@@ -102,15 +108,13 @@ class Rocket(pygame.sprite.Sprite):
             self.rect.y = random.randint(130, 610)
 
 # Classe Bullet que representa os tiros
-class Bullet(pygame.sprite.Sprite):
+class Bullet(Assets):
     # Construtor da classe.
     def __init__(self, assets, left, centery):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = assets[BULLET_IMG]
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
+        super().__init__(assets[BULLET_IMG], NULL, NULL)
         # Coloca no lugar inicial definido em x, y do constutor
         self.rect.centery = centery
         self.rect.left = left
